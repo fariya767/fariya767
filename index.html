@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Shop POS</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>🛒 Simple Shop POS</h2>
+
+<div class="box">
+<h3>➕ পণ্য যোগ করুন</h3>
+<input id="pName" placeholder="পণ্যের নাম">
+<input id="pPrice" type="number" placeholder="দাম">
+<input id="pStock" type="number" placeholder="স্টক">
+<button onclick="addProduct()">Add Product</button>
+</div>
+
+<div class="box">
+<h3>🛍 বিক্রয় করুন</h3>
+<select id="productSelect"></select>
+<input id="qty" type="number" placeholder="পরিমাণ">
+<button onclick="sellProduct()">Sell</button>
+</div>
+
+<div class="box">
+<h3>📊 সারাংশ</h3>
+<p>মোট বিক্রয়: <span id="totalSale">0</span> ৳</p>
+<p>মোট বাকি: <span id="totalDue">0</span> ৳</p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
