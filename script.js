@@ -1,7 +1,6 @@
 let products = JSON.parse(localStorage.getItem("products")) || [];
 let totalSale = parseFloat(localStorage.getItem("totalSale")) || 0;
 let totalDue = parseFloat(localStorage.getItem("totalDue")) || 0;
-
 let lastInvoice = null;
 
 const shop = {
@@ -16,47 +15,78 @@ localStorage.setItem("totalSale", totalSale);
 localStorage.setItem("totalDue", totalDue);
 }
 
-function loadProducts(){
-let select = document.getElementById("productSelect");
+function renderProducts(){
+let table=document.getElementById("productTable");
+let select=document.getElementById("productSelect");
+
+table.innerHTML="";
 select.innerHTML="";
-products.forEach(p=>{
+
+products.forEach((p,index)=>{
+
+table.innerHTML+=`
+<tr>
+<td>${p.name}</td>
+<td>${p.price}</td>
+<td>${p.stock}</td>
+<td><button onclick="deleteProduct(${index})">❌</button></td>
+</tr>
+`;
+
 let option=document.createElement("option");
 option.value=p.name;
 option.textContent=p.name+" (স্টক:"+p.stock+")";
 select.appendChild(option);
+
 });
 }
 
 function addProduct(){
-let name=document.getElementById("pName").value.trim();
-let price=parseFloat(document.getElementById("pPrice").value);
-let stock=parseInt(document.getElementById("pStock").value);
+let name=pName.value.trim();
+let price=parseFloat(pPrice.value);
+let stock=parseInt(pStock.value);
 
-if(!name||price<=0||stock<0){
+if(!name || price<=0 || stock<0){
 alert("সঠিক তথ্য দিন");
 return;
 }
 
 products.push({name,price,stock});
 saveData();
-loadProducts();
+renderProducts();
 
-document.getElementById("pName").value="";
-document.getElementById("pPrice").value="";
-document.getElementById("pStock").value="";
+pName.value="";
+pPrice.value="";
+pStock.value="";
+}
+
+function deleteProduct(index){
+if(confirm("ডিলিট করবেন?")){
+products.splice(index,1);
+saveData();
+renderProducts();
+}
+}
+
+function autoCalculate(){
+let name=productSelect.value;
+let qty=parseInt(qtyInput.value)||0;
+let product=products.find(p=>p.name===name);
+if(product){
+autoTotal.innerText=product.price*qty;
+}
 }
 
 function sellProduct(){
 
 let customerName=document.getElementById("customerName").value||"Walk-in";
 let customerPhone=document.getElementById("customerPhone").value||"-";
-
-let name=document.getElementById("productSelect").value;
+let name=productSelect.value;
 let qty=parseInt(document.getElementById("qty").value);
 
 let product=products.find(p=>p.name===name);
 
-if(!product||qty<=0||product.stock<qty){
+if(!product || qty<=0 || product.stock<qty){
 alert("সমস্যা আছে");
 return;
 }
@@ -64,7 +94,7 @@ return;
 let amount=product.price*qty;
 let paid=parseFloat(prompt("কত টাকা পেয়েছেন?"));
 
-if(isNaN(paid)||paid<0){
+if(isNaN(paid) || paid<0){
 alert("সঠিক Paid দিন");
 return;
 }
@@ -88,19 +118,20 @@ date:new Date().toLocaleString()
 };
 
 saveData();
-loadProducts();
+renderProducts();
 updateSummary();
 
 document.getElementById("qty").value="";
-document.getElementById("customerName").value="";
-document.getElementById("customerPhone").value="";
+autoTotal.innerText=0;
 
 alert("বিক্রয় সম্পন্ন");
 }
 
 function updateSummary(){
-document.getElementById("totalSale").innerText=totalSale;
-document.getElementById("totalDue").innerText=totalDue;
+totalSaleSpan=document.getElementById("totalSale");
+totalDueSpan=document.getElementById("totalDue");
+totalSaleSpan.innerText=totalSale;
+totalDueSpan.innerText=totalDue;
 }
 
 function printInvoice(){
@@ -117,7 +148,7 @@ w.document.write(`
 <head>
 <style>
 body{font-family:monospace;width:280px;margin:auto;}
-h2{text-align:center;margin:5px 0;}
+h2{text-align:center;}
 hr{border:1px dashed black;}
 p{margin:4px 0;font-size:13px;}
 .center{text-align:center;}
@@ -129,24 +160,20 @@ p{margin:4px 0;font-size:13px;}
 <h2>${shop.name}</h2>
 <div class="center">${shop.address}</div>
 <div class="center">Mobile: ${shop.phone}</div>
-
 <hr>
 
 <p>Customer: ${lastInvoice.customerName}</p>
 <p>Phone: ${lastInvoice.customerPhone}</p>
-
 <hr>
 
 <p>পণ্য: ${lastInvoice.product}</p>
 <p>Qty: ${lastInvoice.qty}</p>
-<p>Price: ${lastInvoice.price} ৳</p>
-
+<p>Price: ${lastInvoice.price}</p>
 <hr>
 
 <p class="bold">মোট: ${lastInvoice.amount} ৳</p>
 <p>Paid: ${lastInvoice.paid} ৳</p>
 <p>Due: ${lastInvoice.due} ৳</p>
-
 <hr>
 
 <p>Date: ${lastInvoice.date}</p>
@@ -161,5 +188,14 @@ w.document.close();
 w.print();
 }
 
-loadProducts();
+document.getElementById("qty").addEventListener("input",()=>{
+let name=document.getElementById("productSelect").value;
+let qty=parseInt(document.getElementById("qty").value)||0;
+let product=products.find(p=>p.name===name);
+if(product){
+document.getElementById("autoTotal").innerText=product.price*qty;
+}
+});
+
+renderProducts();
 updateSummary();
