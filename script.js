@@ -2,6 +2,7 @@
    IMRAN SHOP - E-COMMERCE
    Main JavaScript
    Stable + Product Details + Checkout + Orders
+   District Based Delivery Added
 ===================================================== */
 
 
@@ -124,11 +125,54 @@ const products = [
 /* ================= DELIVERY ================= */
 
 /*
-   আপাতত একটি fixed delivery charge রাখা হয়েছে।
-   ভবিষ্যতে জেলা/এলাকা অনুযায়ী আলাদা করা যাবে।
+   ডেলিভারি নিয়ম:
+
+   যশোর = ৳80
+   যশোর ছাড়া বাংলাদেশের সব জেলা = ৳150
 */
 
-const DELIVERY_CHARGE = 80;
+const SAME_DISTRICT =
+    "যশোর";
+
+const SAME_DISTRICT_DELIVERY_CHARGE =
+    80;
+
+const OTHER_DISTRICT_DELIVERY_CHARGE =
+    150;
+
+
+/* =====================================================
+   GET DELIVERY CHARGE
+===================================================== */
+
+function getDeliveryCharge(district) {
+
+    const selectedDistrict =
+        String(
+            district || ""
+        ).trim();
+
+
+    if (!selectedDistrict) {
+
+        return 0;
+
+    }
+
+
+    if (
+        selectedDistrict ===
+        SAME_DISTRICT
+    ) {
+
+        return SAME_DISTRICT_DELIVERY_CHARGE;
+
+    }
+
+
+    return OTHER_DISTRICT_DELIVERY_CHARGE;
+
+}
 
 
 /* ================= CART ================= */
@@ -138,7 +182,9 @@ let cart = [];
 try {
 
     const savedCart =
-        localStorage.getItem("imranShopCart");
+        localStorage.getItem(
+            "imranShopCart"
+        );
 
     if (savedCart) {
 
@@ -167,19 +213,23 @@ try {
 
 /* ================= CURRENT FILTER ================= */
 
-let activeCategory = "সব";
+let activeCategory =
+    "সব";
 
 
 /* ================= PRODUCT MODAL ================= */
 
-let selectedProductId = null;
+let selectedProductId =
+    null;
 
-let modalQuantity = 1;
+let modalQuantity =
+    1;
 
 
 /* ================= CHECKOUT ================= */
 
-let checkoutOpenedFromBuyNow = false;
+let checkoutOpenedFromBuyNow =
+    false;
 
 
 /* ================= MONEY FORMAT ================= */
@@ -189,7 +239,10 @@ function formatMoney(amount) {
     const number =
         Number(amount) || 0;
 
-    return "৳" + number.toLocaleString("bn-BD");
+    return "৳" +
+        number.toLocaleString(
+            "bn-BD"
+        );
 
 }
 
@@ -233,7 +286,9 @@ function renderCategories() {
 
 
     document
-        .querySelectorAll(".category-card")
+        .querySelectorAll(
+            ".category-card"
+        )
         .forEach(card => {
 
             card.addEventListener(
@@ -294,7 +349,9 @@ function renderFilterButtons() {
 
 
     document
-        .querySelectorAll(".filter-button")
+        .querySelectorAll(
+            ".filter-button"
+        )
         .forEach(button => {
 
             button.addEventListener(
@@ -324,24 +381,30 @@ function selectCategory(category) {
 
 
     document
-        .querySelectorAll(".filter-button")
+        .querySelectorAll(
+            ".filter-button"
+        )
         .forEach(button => {
 
             button.classList.toggle(
                 "active",
-                button.dataset.category === category
+                button.dataset.category ===
+                category
             );
 
         });
 
 
     document
-        .querySelectorAll(".category-card")
+        .querySelectorAll(
+            ".category-card"
+        )
         .forEach(card => {
 
             card.classList.toggle(
                 "active",
-                card.dataset.category === category
+                card.dataset.category ===
+                category
             );
 
         });
@@ -400,7 +463,8 @@ function renderProducts() {
 
             const categoryMatch =
                 activeCategory === "সব" ||
-                product.category === activeCategory;
+                product.category ===
+                activeCategory;
 
 
             const productName =
@@ -417,8 +481,12 @@ function renderProducts() {
 
             const searchMatch =
                 searchText === "" ||
-                productName.includes(searchText) ||
-                productCategory.includes(searchText);
+                productName.includes(
+                    searchText
+                ) ||
+                productCategory.includes(
+                    searchText
+                );
 
 
             return (
@@ -429,7 +497,9 @@ function renderProducts() {
         });
 
 
-    if (filteredProducts.length === 0) {
+    if (
+        filteredProducts.length === 0
+    ) {
 
         productGrid.innerHTML = `
 
@@ -523,7 +593,9 @@ function renderProducts() {
     /* Product card */
 
     document
-        .querySelectorAll(".product-card")
+        .querySelectorAll(
+            ".product-card"
+        )
         .forEach(card => {
 
             card.addEventListener(
@@ -534,6 +606,7 @@ function renderProducts() {
                         Number(
                             this.dataset.productId
                         );
+
 
                     openProductModal(
                         productId
@@ -548,7 +621,9 @@ function renderProducts() {
     /* Add cart button */
 
     document
-        .querySelectorAll(".add-cart-button")
+        .querySelectorAll(
+            ".add-cart-button"
+        )
         .forEach(button => {
 
             button.addEventListener(
@@ -584,7 +659,9 @@ function openProductModal(productId) {
 
     const product =
         products.find(
-            item => item.id === productId
+            item =>
+                item.id ===
+                productId
         );
 
 
@@ -640,7 +717,8 @@ function openProductModal(productId) {
         productId;
 
 
-    modalQuantity = 1;
+    modalQuantity =
+        1;
 
 
     if (modalImage) {
@@ -735,7 +813,8 @@ function closeProductModal() {
     selectedProductId =
         null;
 
-    modalQuantity = 1;
+    modalQuantity =
+        1;
 
 
     updateBodyScroll();
@@ -762,12 +841,16 @@ function updateBodyScroll() {
 
     const checkoutIsOpen =
         checkoutOverlay &&
-        checkoutOverlay.classList.contains("show");
+        checkoutOverlay.classList.contains(
+            "show"
+        );
 
 
     const productModalIsOpen =
         productOverlay &&
-        productOverlay.classList.contains("show");
+        productOverlay.classList.contains(
+            "show"
+        );
 
 
     if (
@@ -822,7 +905,9 @@ function increaseModalQuantity() {
 
 
     modalQuantity =
-        Number(modalQuantity) + 1;
+        Number(
+            modalQuantity
+        ) + 1;
 
 
     updateModalQuantity();
@@ -842,7 +927,9 @@ function decreaseModalQuantity() {
     if (modalQuantity > 1) {
 
         modalQuantity =
-            Number(modalQuantity) - 1;
+            Number(
+                modalQuantity
+            ) - 1;
 
     }
 
@@ -866,12 +953,16 @@ function addModalProductToCart() {
 
 
     const quantity =
-        Number(modalQuantity) || 1;
+        Number(
+            modalQuantity
+        ) || 1;
 
 
     const product =
         products.find(
-            item => item.id === productId
+            item =>
+                item.id ===
+                productId
         );
 
 
@@ -911,12 +1002,16 @@ function buyNowProduct() {
 
 
     const quantity =
-        Number(modalQuantity) || 1;
+        Number(
+            modalQuantity
+        ) || 1;
 
 
     const product =
         products.find(
-            item => item.id === productId
+            item =>
+                item.id ===
+                productId
         );
 
 
@@ -936,7 +1031,9 @@ function buyNowProduct() {
        Buy Now এখন সরাসরি Checkout খুলবে।
     */
 
-    checkoutOpenedFromBuyNow = true;
+    checkoutOpenedFromBuyNow =
+        true;
+
 
     openCheckout();
 
@@ -951,7 +1048,9 @@ function addToCart(productId) {
 
     const product =
         products.find(
-            item => item.id === productId
+            item =>
+                item.id ===
+                productId
         );
 
 
@@ -988,7 +1087,9 @@ function addProductQuantityToCart(
 
 
     if (
-        !Number.isFinite(numericQuantity) ||
+        !Number.isFinite(
+            numericQuantity
+        ) ||
         numericQuantity <= 0
     ) {
 
@@ -999,7 +1100,9 @@ function addProductQuantityToCart(
 
     const existingProduct =
         cart.find(
-            item => item.id === productId
+            item =>
+                item.id ===
+                productId
         );
 
 
@@ -1007,14 +1110,20 @@ function addProductQuantityToCart(
 
         existingProduct.quantity =
             Number(
-                existingProduct.quantity || 0
+                existingProduct.quantity ||
+                0
             ) + numericQuantity;
 
     } else {
 
         cart.push({
-            id: productId,
-            quantity: numericQuantity
+
+            id:
+                productId,
+
+            quantity:
+                numericQuantity
+
         });
 
     }
@@ -1036,7 +1145,9 @@ function changeQuantity(
 
     const cartItem =
         cart.find(
-            item => item.id === productId
+            item =>
+                item.id ===
+                productId
         );
 
 
@@ -1045,15 +1156,21 @@ function changeQuantity(
 
     cartItem.quantity =
         Number(
-            cartItem.quantity || 0
-        ) + Number(change);
+            cartItem.quantity ||
+            0
+        ) +
+        Number(change);
 
 
-    if (cartItem.quantity <= 0) {
+    if (
+        cartItem.quantity <= 0
+    ) {
 
         cart =
             cart.filter(
-                item => item.id !== productId
+                item =>
+                    item.id !==
+                    productId
             );
 
     }
@@ -1072,7 +1189,9 @@ function removeFromCart(productId) {
 
     cart =
         cart.filter(
-            item => item.id !== productId
+            item =>
+                item.id !==
+                productId
         );
 
 
@@ -1115,11 +1234,14 @@ function saveCart() {
 
 function getCartTotals() {
 
-    let totalItems = 0;
+    let totalItems =
+        0;
 
-    let subtotal = 0;
+    let subtotal =
+        0;
 
-    const validCart = [];
+    const validCart =
+        [];
 
 
     cart.forEach(item => {
@@ -1127,7 +1249,8 @@ function getCartTotals() {
         const product =
             products.find(
                 productItem =>
-                    productItem.id === item.id
+                    productItem.id ===
+                    item.id
             );
 
 
@@ -1135,11 +1258,15 @@ function getCartTotals() {
 
 
         const quantity =
-            Number(item.quantity);
+            Number(
+                item.quantity
+            );
 
 
         if (
-            !Number.isFinite(quantity) ||
+            !Number.isFinite(
+                quantity
+            ) ||
             quantity <= 0
         ) {
 
@@ -1149,8 +1276,13 @@ function getCartTotals() {
 
 
         validCart.push({
-            id: product.id,
-            quantity: quantity
+
+            id:
+                product.id,
+
+            quantity:
+                quantity
+
         });
 
 
@@ -1159,17 +1291,22 @@ function getCartTotals() {
 
 
         subtotal +=
-            product.price * quantity;
+            product.price *
+            quantity;
 
     });
 
 
-    cart = validCart;
+    cart =
+        validCart;
 
 
     return {
+
         totalItems,
+
         subtotal
+
     };
 
 }
@@ -1233,8 +1370,15 @@ function renderCart() {
 
                 const product =
                     products.find(
-                        p => p.id === item.id
+                        p =>
+                            p.id ===
+                            item.id
                     );
+
+
+                if (!product) {
+                    return "";
+                }
 
 
                 return `
@@ -1329,7 +1473,8 @@ function renderCart() {
 
 
                         if (
-                            action === "plus"
+                            action ===
+                            "plus"
                         ) {
 
                             changeQuantity(
@@ -1744,26 +1889,42 @@ function calculateCheckoutTotals() {
         getCartTotals();
 
 
+    const customer =
+        getCheckoutFormData();
+
+
     const subtotal =
         totals.subtotal;
 
 
     const delivery =
-        subtotal > 0
-            ? DELIVERY_CHARGE
+        subtotal > 0 &&
+        customer.district
+            ? getDeliveryCharge(
+                customer.district
+            )
             : 0;
 
 
     const grandTotal =
-        subtotal + delivery;
+        subtotal +
+        delivery;
 
 
     return {
+
         subtotal,
+
         delivery,
+
         grandTotal,
+
         totalItems:
-            totals.totalItems
+            totals.totalItems,
+
+        district:
+            customer.district
+
     };
 
 }
@@ -1829,8 +1990,15 @@ function renderCheckoutSummary() {
 
                 const product =
                     products.find(
-                        p => p.id === item.id
+                        p =>
+                            p.id ===
+                            item.id
                     );
+
+
+                if (!product) {
+                    return "";
+                }
 
 
                 const itemTotal =
@@ -1885,10 +2053,19 @@ function renderCheckoutSummary() {
 
     if (checkoutDelivery) {
 
-        checkoutDelivery.textContent =
-            formatMoney(
-                totals.delivery
-            );
+        if (!totals.district) {
+
+            checkoutDelivery.textContent =
+                "জেলা নির্বাচন করুন";
+
+        } else {
+
+            checkoutDelivery.textContent =
+                formatMoney(
+                    totals.delivery
+                );
+
+        }
 
     }
 
@@ -2034,8 +2211,14 @@ function isValidBangladeshPhone(phone) {
 
     const cleanPhone =
         String(phone)
-            .replace(/\s+/g, "")
-            .replace(/-/g, "");
+            .replace(
+                /\s+/g,
+                ""
+            )
+            .replace(
+                /-/g,
+                ""
+            );
 
 
     /*
@@ -2046,9 +2229,19 @@ function isValidBangladeshPhone(phone) {
     */
 
     return (
-        /^01[3-9]\d{8}$/.test(cleanPhone) ||
-        /^\+8801[3-9]\d{8}$/.test(cleanPhone) ||
-        /^8801[3-9]\d{8}$/.test(cleanPhone)
+
+        /^01[3-9]\d{8}$/.test(
+            cleanPhone
+        ) ||
+
+        /^\+8801[3-9]\d{8}$/.test(
+            cleanPhone
+        ) ||
+
+        /^8801[3-9]\d{8}$/.test(
+            cleanPhone
+        )
+
     );
 
 }
@@ -2071,19 +2264,27 @@ function createOrderId() {
     const month =
         String(
             now.getMonth() + 1
-        ).padStart(2, "0");
+        ).padStart(
+            2,
+            "0"
+        );
 
 
     const day =
         String(
             now.getDate()
-        ).padStart(2, "0");
+        ).padStart(
+            2,
+            "0"
+        );
 
 
     const time =
         String(
             now.getTime()
-        ).slice(-5);
+        ).slice(
+            -5
+        );
 
 
     return `IMS-${year}${month}${day}-${time}`;
@@ -2157,7 +2358,9 @@ function saveOrder(order) {
 
         localStorage.setItem(
             "imranShopOrders",
-            JSON.stringify(orders)
+            JSON.stringify(
+                orders
+            )
         );
 
 
@@ -2195,6 +2398,12 @@ function getCheckoutFormData() {
         );
 
 
+    const districtInput =
+        document.getElementById(
+            "customerDistrict"
+        );
+
+
     const addressInput =
         document.getElementById(
             "customerAddress"
@@ -2214,15 +2423,24 @@ function getCheckoutFormData() {
                 ? nameInput.value.trim()
                 : "",
 
+
         phone:
             phoneInput
                 ? phoneInput.value.trim()
                 : "",
 
+
+        district:
+            districtInput
+                ? districtInput.value.trim()
+                : "",
+
+
         address:
             addressInput
                 ? addressInput.value.trim()
                 : "",
+
 
         paymentMethod:
             paymentInput
@@ -2263,11 +2481,12 @@ function placeOrder(event) {
     if (
         !customer.name ||
         !customer.phone ||
+        !customer.district ||
         !customer.address
     ) {
 
         alert(
-            "দয়া করে সব প্রয়োজনীয় তথ্য পূরণ করুন।"
+            "দয়া করে নাম, মোবাইল নম্বর, জেলা এবং সম্পূর্ণ ঠিকানা পূরণ করুন।"
         );
 
         return;
@@ -2303,7 +2522,9 @@ function placeOrder(event) {
 
             const product =
                 products.find(
-                    p => p.id === item.id
+                    p =>
+                        p.id ===
+                        item.id
                 );
 
 
@@ -2338,6 +2559,7 @@ function placeOrder(event) {
         orderId:
             orderId,
 
+
         customer: {
 
             name:
@@ -2346,28 +2568,38 @@ function placeOrder(event) {
             phone:
                 customer.phone,
 
+            district:
+                customer.district,
+
             address:
                 customer.address
 
         },
 
+
         items:
             orderItems,
+
 
         subtotal:
             totals.subtotal,
 
+
         deliveryCharge:
             totals.delivery,
+
 
         grandTotal:
             totals.grandTotal,
 
+
         paymentMethod:
             customer.paymentMethod,
 
+
         status:
             "Pending",
+
 
         createdAt:
             new Date().toISOString()
@@ -2376,7 +2608,9 @@ function placeOrder(event) {
 
 
     const saved =
-        saveOrder(order);
+        saveOrder(
+            order
+        );
 
 
     if (!saved) {
@@ -2489,7 +2723,9 @@ function showOrderSuccess(order) {
                 </span>
 
                 <strong>
-                    ${escapeHtml(order.customer.name)}
+                    ${escapeHtml(
+                        order.customer.name
+                    )}
                 </strong>
 
             </div>
@@ -2502,7 +2738,24 @@ function showOrderSuccess(order) {
                 </span>
 
                 <strong>
-                    ${escapeHtml(order.customer.phone)}
+                    ${escapeHtml(
+                        order.customer.phone
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="success-summary-row">
+
+                <span>
+                    জেলা
+                </span>
+
+                <strong>
+                    ${escapeHtml(
+                        order.customer.district
+                    )}
                 </strong>
 
             </div>
@@ -2528,7 +2781,9 @@ function showOrderSuccess(order) {
                 </span>
 
                 <strong>
-                    ${formatMoney(order.subtotal)}
+                    ${formatMoney(
+                        order.subtotal
+                    )}
                 </strong>
 
             </div>
@@ -2541,7 +2796,9 @@ function showOrderSuccess(order) {
                 </span>
 
                 <strong>
-                    ${formatMoney(order.deliveryCharge)}
+                    ${formatMoney(
+                        order.deliveryCharge
+                    )}
                 </strong>
 
             </div>
@@ -2554,7 +2811,9 @@ function showOrderSuccess(order) {
                 </span>
 
                 <strong>
-                    ${formatMoney(order.grandTotal)}
+                    ${formatMoney(
+                        order.grandTotal
+                    )}
                 </strong>
 
             </div>
@@ -2567,7 +2826,9 @@ function showOrderSuccess(order) {
                 </span>
 
                 <strong>
-                    ${escapeHtml(order.paymentMethod)}
+                    ${escapeHtml(
+                        order.paymentMethod
+                    )}
                 </strong>
 
             </div>
@@ -2589,11 +2850,31 @@ function showOrderSuccess(order) {
 function escapeHtml(value) {
 
     return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
@@ -2631,6 +2912,12 @@ function setupCheckout() {
     const successCloseButton =
         document.getElementById(
             "successCloseButton"
+        );
+
+
+    const customerDistrict =
+        document.getElementById(
+            "customerDistrict"
         );
 
 
@@ -2680,6 +2967,25 @@ function setupCheckout() {
         checkoutForm.addEventListener(
             "submit",
             placeOrder
+        );
+
+    }
+
+
+    /*
+       জেলা পরিবর্তন হলেই
+       ডেলিভারি চার্জ অটোমেটিক আপডেট হবে।
+    */
+
+    if (customerDistrict) {
+
+        customerDistrict.addEventListener(
+            "change",
+            function () {
+
+                renderCheckoutSummary();
+
+            }
         );
 
     }
@@ -2808,7 +3114,8 @@ function setupKeyboardEvents() {
         function (event) {
 
             if (
-                event.key !== "Escape"
+                event.key !==
+                "Escape"
             ) {
 
                 return;
@@ -2830,7 +3137,9 @@ function setupKeyboardEvents() {
 
             if (
                 checkoutOverlay &&
-                checkoutOverlay.classList.contains("show")
+                checkoutOverlay.classList.contains(
+                    "show"
+                )
             ) {
 
                 closeCheckout();
@@ -2842,7 +3151,9 @@ function setupKeyboardEvents() {
 
             if (
                 productOverlay &&
-                productOverlay.classList.contains("show")
+                productOverlay.classList.contains(
+                    "show"
+                )
             ) {
 
                 closeProductModal();
