@@ -1,59 +1,580 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Imran Electronics POS</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ইমরান শপ | অনলাইন স্টোর</title>
+
+    <meta
+        name="description"
+        content="ইমরান ইলেকট্রনিক্স অ্যান্ড মোবাইল সার্ভিসিং সেন্টার - অনলাইন শপ"
+    >
+
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<h2>🛒 Imran Electronics POS</h2>
+    <!-- ================= HEADER ================= -->
 
-<div class="box">
-<h3>➕ পণ্য যোগ করুন</h3>
-<input id="pName" placeholder="পণ্যের নাম">
-<input id="pPrice" type="number" placeholder="দাম">
-<input id="pStock" type="number" placeholder="স্টক">
-<button onclick="addProduct()">Add Product</button>
-</div>
+    <header class="top-header">
+        <div class="container top-header-content">
 
-<div class="box">
-<h3>📦 পণ্যের তালিকা</h3>
-<table>
-<thead>
-<tr>
-<th>নাম</th>
-<th>দাম</th>
-<th>স্টক</th>
-<th>ডিলিট</th>
-</tr>
-</thead>
-<tbody id="productTable"></tbody>
-</table>
-</div>
+            <p>🚚 সারাদেশে দ্রুত ডেলিভারি</p>
 
-<div class="box">
-<h3>🛍 বিক্রয় করুন</h3>
+            <p>📞 যোগাযোগ: 01XXXXXXXXX</p>
 
-<input id="customerName" placeholder="কাস্টমার নাম">
-<input id="customerPhone" placeholder="মোবাইল">
+        </div>
+    </header>
 
-<select id="productSelect"></select>
-<input id="qty" type="number" placeholder="পরিমাণ">
 
-<p>মোট মূল্য: <span id="autoTotal">0</span> ৳</p>
+    <!-- ================= NAVBAR ================= -->
 
-<button onclick="sellProduct()">Sell</button>
-<button onclick="printInvoice()">🖨 Print</button>
-</div>
+    <nav class="navbar">
 
-<div class="box">
-<h3>📊 সারাংশ</h3>
-<p>মোট বিক্রয়: <span id="totalSale">0</span> ৳</p>
-<p>মোট বাকি: <span id="totalDue">0</span> ৳</p>
-</div>
+        <div class="container navbar-content">
 
-<script src="script.js"></script>
+            <a href="#" class="logo">
+
+                <div class="logo-icon">
+                    🛍️
+                </div>
+
+                <div class="logo-text">
+
+                    <strong>
+                        ইমরান শপ
+                    </strong>
+
+                    <span>
+                        ইলেকট্রনিক্স অ্যান্ড মোবাইল সার্ভিসিং সেন্টার
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- Mobile Menu Button -->
+
+            <button
+                class="menu-button"
+                id="menuButton"
+                aria-label="Menu"
+            >
+                ☰
+            </button>
+
+
+            <!-- Navigation -->
+
+            <div class="navigation" id="navigation">
+
+                <a href="#home">
+                    হোম
+                </a>
+
+                <a href="#categories">
+                    ক্যাটাগরি
+                </a>
+
+                <a href="#products">
+                    পণ্য
+                </a>
+
+                <a href="#about">
+                    আমাদের সম্পর্কে
+                </a>
+
+                <button
+                    class="cart-button"
+                    id="cartButton"
+                >
+
+                    🛒 কার্ট
+
+                    <span id="cartCount">
+                        0
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main id="home">
+
+
+        <!-- ================= HERO SECTION ================= -->
+
+        <section class="hero-section">
+
+            <div class="container hero-content">
+
+                <div class="hero-text">
+
+                    <span class="hero-label">
+                        ✨ বিশ্বস্ত অনলাইন শপ
+                    </span>
+
+                    <h1>
+                        আপনার পছন্দের পণ্য,
+                        <span>
+                            এখন হাতের মুঠোয়
+                        </span>
+                    </h1>
+
+                    <p>
+                        বিভিন্ন ক্যাটাগরির প্রয়োজনীয় পণ্য
+                        এক জায়গায়। সহজ অর্ডার, নির্ভরযোগ্য
+                        সেবা এবং দ্রুত ডেলিভারি।
+                    </p>
+
+
+                    <div class="hero-buttons">
+
+                        <a
+                            href="#products"
+                            class="primary-button"
+                        >
+                            শপিং শুরু করুন →
+                        </a>
+
+                        <a
+                            href="#categories"
+                            class="secondary-button"
+                        >
+                            ক্যাটাগরি দেখুন
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Hero Card -->
+
+                <div class="hero-card">
+
+                    <div class="offer-badge">
+                        🔥 বিশেষ অফার
+                    </div>
+
+                    <div class="hero-icon">
+                        🛒
+                    </div>
+
+                    <h2>
+                        নতুন পণ্য আসছে
+                    </h2>
+
+                    <p>
+                        নিয়মিত নতুন পণ্য ও বিশেষ অফার
+                        যোগ করা হবে।
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= SERVICE FEATURES ================= -->
+
+        <section class="features-section">
+
+            <div class="container features-grid">
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🚚
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            দ্রুত ডেলিভারি
+                        </strong>
+
+                        <p>
+                            নিরাপদে পণ্য পৌঁছে দিই
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🔒
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            নিরাপদ কেনাকাটা
+                        </strong>
+
+                        <p>
+                            আপনার তথ্য সুরক্ষিত
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        💬
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            কাস্টমার সাপোর্ট
+                        </strong>
+
+                        <p>
+                            প্রয়োজন হলে যোগাযোগ করুন
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ↩️
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            সহজ রিটার্ন
+                        </strong>
+
+                        <p>
+                            নীতিমালা অনুযায়ী রিটার্ন
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CATEGORY SECTION ================= -->
+
+        <section
+            class="section"
+            id="categories"
+        >
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            ক্যাটাগরি
+                        </span>
+
+                        <h2>
+                            আপনার প্রয়োজন অনুযায়ী
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <!-- JavaScript এখানে Category তৈরি করবে -->
+
+                <div
+                    class="category-grid"
+                    id="categoryGrid"
+                >
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= PRODUCT SECTION ================= -->
+
+        <section
+            class="section products-section"
+            id="products"
+        >
+
+            <div class="container">
+
+
+                <div class="products-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            জনপ্রিয় পণ্য
+                        </span>
+
+                        <h2>
+                            আমাদের পণ্য
+                        </h2>
+
+                    </div>
+
+
+                    <!-- Search -->
+
+                    <div class="search-box">
+
+                        <input
+                            type="search"
+                            id="searchInput"
+                            placeholder="পণ্য খুঁজুন..."
+                            autocomplete="off"
+                        >
+
+                        <span>
+                            🔍
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Category Filter -->
+
+                <div
+                    class="filter-row"
+                    id="filterRow"
+                >
+
+                </div>
+
+
+                <!-- Products -->
+
+                <div
+                    class="product-grid"
+                    id="productGrid"
+                >
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ABOUT SECTION ================= -->
+
+        <section
+            class="section about-section"
+            id="about"
+        >
+
+            <div class="container">
+
+                <div class="about-box">
+
+                    <div class="about-content">
+
+                        <span class="section-label">
+                            আমাদের সম্পর্কে
+                        </span>
+
+                        <h2>
+                            ইমরান শপে স্বাগতম
+                        </h2>
+
+                        <p>
+                            ইমরান ইলেকট্রনিক্স অ্যান্ড মোবাইল
+                            সার্ভিসিং সেন্টারকে কেন্দ্র করে আমরা
+                            একটি আধুনিক General E-commerce
+                            প্ল্যাটফর্ম তৈরি করছি।
+                        </p>
+
+                        <p>
+                            ভবিষ্যতে বিভিন্ন ধরনের পণ্য এখানে
+                            পাওয়া যাবে।
+                        </p>
+
+                    </div>
+
+
+                    <div class="shop-address">
+
+                        <strong>
+                            📍 আমাদের ঠিকানা
+                        </strong>
+
+                        <p>
+                            গদখালি বাজার বাস স্ট্যান্ড,
+                            <br>
+                            রহিম সরদার মার্কেট,
+                            <br>
+                            ঝিকরগাছা, যশোর।
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= CART OVERLAY ================= -->
+
+    <div
+        class="cart-overlay"
+        id="cartOverlay"
+    >
+    </div>
+
+
+    <!-- ================= CART DRAWER ================= -->
+
+    <aside
+        class="cart-drawer"
+        id="cartDrawer"
+    >
+
+        <div class="cart-header">
+
+            <h2>
+                🛒 আপনার কার্ট
+            </h2>
+
+            <button
+                id="closeCart"
+                class="close-cart"
+                aria-label="Close cart"
+            >
+                ✕
+            </button>
+
+        </div>
+
+
+        <!-- Cart Products -->
+
+        <div
+            class="cart-items"
+            id="cartItems"
+        >
+
+        </div>
+
+
+        <!-- Cart Footer -->
+
+        <div class="cart-footer">
+
+            <div class="cart-total">
+
+                <span>
+                    মোট
+                </span>
+
+                <strong id="cartTotal">
+                    ৳0
+                </strong>
+
+            </div>
+
+
+            <button
+                class="checkout-button"
+                id="checkoutButton"
+            >
+                চেকআউট করুন
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="container footer-content">
+
+
+            <div class="footer-brand">
+
+                <strong>
+                    ইমরান শপ
+                </strong>
+
+                <p>
+                    ইমরান ইলেকট্রনিক্স অ্যান্ড
+                    মোবাইল সার্ভিসিং সেন্টার
+                </p>
+
+            </div>
+
+
+            <div class="footer-info">
+
+                <p>
+                    📍 ঝিকরগাছা, যশোর
+                </p>
+
+                <p>
+                    📞 01XXXXXXXXX
+                </p>
+
+            </div>
+
+
+            <div class="copyright">
+
+                © 2026 Imran Shop.
+                সর্বস্বত্ব সংরক্ষিত।
+
+            </div>
+
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="app.js"></script>
+
 </body>
 </html>
