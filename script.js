@@ -1,6 +1,6 @@
 /* =====================================================
    IMRAN SHOP - E-COMMERCE
-   Main JavaScript
+   Main JavaScript - Stable Version
 ===================================================== */
 
 
@@ -37,7 +37,6 @@ const categories = [
 /* ================= PRODUCTS ================= */
 
 const products = [
-
     {
         id: 1,
         name: "স্মার্টফোন",
@@ -46,7 +45,6 @@ const products = [
         oldPrice: 17999,
         icon: "📱"
     },
-
     {
         id: 2,
         name: "ব্লুটুথ হেডফোন",
@@ -55,7 +53,6 @@ const products = [
         oldPrice: 1599,
         icon: "🎧"
     },
-
     {
         id: 3,
         name: "ক্যাজুয়াল টি-শার্ট",
@@ -64,7 +61,6 @@ const products = [
         oldPrice: 899,
         icon: "👕"
     },
-
     {
         id: 4,
         name: "ফ্যাশন ব্যাগ",
@@ -73,7 +69,6 @@ const products = [
         oldPrice: 1499,
         icon: "👜"
     },
-
     {
         id: 5,
         name: "প্রিমিয়াম চাল ৫ কেজি",
@@ -82,7 +77,6 @@ const products = [
         oldPrice: 720,
         icon: "🍚"
     },
-
     {
         id: 6,
         name: "কিচেন সেট",
@@ -91,7 +85,6 @@ const products = [
         oldPrice: 1099,
         icon: "🍳"
     },
-
     {
         id: 7,
         name: "বিউটি কেয়ার সেট",
@@ -100,7 +93,6 @@ const products = [
         oldPrice: 999,
         icon: "💄"
     },
-
     {
         id: 8,
         name: "স্টাইলিশ ঘড়ি",
@@ -109,15 +101,27 @@ const products = [
         oldPrice: 1299,
         icon: "⌚"
     }
-
 ];
 
 
 /* ================= CART ================= */
 
-let cart = JSON.parse(
-    localStorage.getItem("imranShopCart")
-) || [];
+let cart = [];
+
+try {
+    const savedCart = localStorage.getItem("imranShopCart");
+
+    if (savedCart) {
+        const parsedCart = JSON.parse(savedCart);
+
+        if (Array.isArray(parsedCart)) {
+            cart = parsedCart;
+        }
+    }
+} catch (error) {
+    console.log("Cart data reset:", error);
+    cart = [];
+}
 
 
 /* ================= CURRENT FILTER ================= */
@@ -129,7 +133,9 @@ let activeCategory = "সব";
 
 function formatMoney(amount) {
 
-    return "৳" + amount.toLocaleString("bn-BD");
+    const number = Number(amount) || 0;
+
+    return "৳" + number.toLocaleString("bn-BD");
 
 }
 
@@ -143,35 +149,42 @@ function renderCategories() {
     const categoryGrid =
         document.getElementById("categoryGrid");
 
-
     if (!categoryGrid) return;
 
+    categoryGrid.innerHTML = categories.map(category => {
 
-    categoryGrid.innerHTML = categories.map(
-        category => {
+        return `
+            <button
+                type="button"
+                class="category-card"
+                data-category="${category.name}"
+            >
+                <div class="category-icon">
+                    ${category.icon}
+                </div>
 
-            return `
+                <span>
+                    ${category.name}
+                </span>
+            </button>
+        `;
 
-                <button
-                    class="category-card"
-                    data-category="${category.name}"
-                    onclick="selectCategory('${category.name}')"
-                >
+    }).join("");
 
-                    <div class="category-icon">
-                        ${category.icon}
-                    </div>
 
-                    <span>
-                        ${category.name}
-                    </span>
+    document
+        .querySelectorAll(".category-card")
+        .forEach(card => {
 
-                </button>
+            card.addEventListener("click", function () {
 
-            `;
+                selectCategory(
+                    this.dataset.category
+                );
 
-        }
-    ).join("");
+            });
+
+        });
 
 }
 
@@ -185,51 +198,50 @@ function renderFilterButtons() {
     const filterRow =
         document.getElementById("filterRow");
 
-
     if (!filterRow) return;
 
 
     filterRow.innerHTML = `
-
         <button
+            type="button"
             class="filter-button active"
             data-category="সব"
         >
             সব পণ্য
         </button>
 
-        ${categories.map(category => `
+        ${categories.map(category => {
 
-            <button
-                class="filter-button"
-                data-category="${category.name}"
-            >
-                ${category.name}
-            </button>
+            return `
+                <button
+                    type="button"
+                    class="filter-button"
+                    data-category="${category.name}"
+                >
+                    ${category.name}
+                </button>
+            `;
 
-        `).join("")}
-
+        }).join("")}
     `;
 
 
-    const buttons =
-        document.querySelectorAll(".filter-button");
+    document
+        .querySelectorAll(".filter-button")
+        .forEach(button => {
 
+            button.addEventListener(
+                "click",
+                function () {
 
-    buttons.forEach(button => {
+                    selectCategory(
+                        this.dataset.category
+                    );
 
-        button.addEventListener(
-            "click",
-            function () {
+                }
+            );
 
-                selectCategory(
-                    this.dataset.category
-                );
-
-            }
-        );
-
-    });
+        });
 
 }
 
@@ -243,8 +255,6 @@ function selectCategory(category) {
     activeCategory = category;
 
 
-    /* Update filter buttons */
-
     document
         .querySelectorAll(".filter-button")
         .forEach(button => {
@@ -256,8 +266,6 @@ function selectCategory(category) {
 
         });
 
-
-    /* Update category cards */
 
     document
         .querySelectorAll(".category-card")
@@ -274,11 +282,8 @@ function selectCategory(category) {
     renderProducts();
 
 
-    /* Scroll to product section */
-
     const productSection =
         document.getElementById("products");
-
 
     if (productSection) {
 
@@ -300,7 +305,6 @@ function renderProducts() {
     const productGrid =
         document.getElementById("productGrid");
 
-
     if (!productGrid) return;
 
 
@@ -317,20 +321,22 @@ function renderProducts() {
     const filteredProducts =
         products.filter(product => {
 
-
             const categoryMatch =
                 activeCategory === "সব" ||
                 product.category === activeCategory;
 
 
+            const productName =
+                String(product.name).toLowerCase();
+
+            const productCategory =
+                String(product.category).toLowerCase();
+
+
             const searchMatch =
                 searchText === "" ||
-                product.name
-                    .toLowerCase()
-                    .includes(searchText) ||
-                product.category
-                    .toLowerCase()
-                    .includes(searchText);
+                productName.includes(searchText) ||
+                productCategory.includes(searchText);
 
 
             return categoryMatch && searchMatch;
@@ -338,45 +344,30 @@ function renderProducts() {
         });
 
 
-    /* No products */
-
     if (filteredProducts.length === 0) {
 
         productGrid.innerHTML = `
-
             <div
                 class="empty-cart"
                 style="grid-column: 1 / -1;"
             >
-
                 🔍
-
                 <br><br>
-
                 কোনো পণ্য পাওয়া যায়নি।
-
                 <br>
-
                 অন্য কিছু লিখে চেষ্টা করুন।
-
             </div>
-
         `;
 
         return;
-
     }
 
-
-    /* Product cards */
 
     productGrid.innerHTML =
         filteredProducts.map(product => {
 
             return `
-
                 <article class="product-card">
-
 
                     <div class="product-image">
 
@@ -388,19 +379,15 @@ function renderProducts() {
 
                     </div>
 
-
                     <div class="product-info">
-
 
                         <span class="product-category">
                             ${product.category}
                         </span>
 
-
                         <h3>
                             ${product.name}
                         </h3>
-
 
                         <div>
 
@@ -414,24 +401,39 @@ function renderProducts() {
 
                         </div>
 
-
                         <button
+                            type="button"
                             class="add-cart-button"
-                            onclick="addToCart(${product.id})"
+                            data-product-id="${product.id}"
                         >
-
                             🛒 কার্টে যোগ করুন
-
                         </button>
-
 
                     </div>
 
                 </article>
-
             `;
 
         }).join("");
+
+
+    document
+        .querySelectorAll(".add-cart-button")
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    const productId =
+                        Number(this.dataset.productId);
+
+                    addToCart(productId);
+
+                }
+            );
+
+        });
 
 }
 
@@ -442,22 +444,31 @@ function renderProducts() {
 
 function addToCart(productId) {
 
+    const product =
+        products.find(
+            item => item.id === productId
+        );
+
+
+    if (!product) return;
+
+
     const existingProduct =
-        cart.find(item => item.id === productId);
+        cart.find(
+            item => item.id === productId
+        );
 
 
     if (existingProduct) {
 
-        existingProduct.quantity++;
+        existingProduct.quantity =
+            Number(existingProduct.quantity || 0) + 1;
 
     } else {
 
         cart.push({
-
             id: productId,
-
             quantity: 1
-
         });
 
     }
@@ -465,9 +476,7 @@ function addToCart(productId) {
 
     saveCart();
 
-
     openCart();
-
 
     showMessage(
         "পণ্যটি কার্টে যোগ হয়েছে ✓"
@@ -480,19 +489,19 @@ function addToCart(productId) {
    CHANGE QUANTITY
 ===================================================== */
 
-function changeQuantity(
-    productId,
-    change
-) {
+function changeQuantity(productId, change) {
 
     const cartItem =
-        cart.find(item => item.id === productId);
+        cart.find(
+            item => item.id === productId
+        );
 
 
     if (!cartItem) return;
 
 
-    cartItem.quantity += change;
+    cartItem.quantity =
+        Number(cartItem.quantity || 0) + Number(change);
 
 
     if (cartItem.quantity <= 0) {
@@ -533,10 +542,21 @@ function removeFromCart(productId) {
 
 function saveCart() {
 
-    localStorage.setItem(
-        "imranShopCart",
-        JSON.stringify(cart)
-    );
+    try {
+
+        localStorage.setItem(
+            "imranShopCart",
+            JSON.stringify(cart)
+        );
+
+    } catch (error) {
+
+        console.log(
+            "Could not save cart:",
+            error
+        );
+
+    }
 
 
     renderCart();
@@ -570,10 +590,50 @@ function renderCart() {
     let totalPrice = 0;
 
 
+    const validCart = [];
+
+
+    cart.forEach(item => {
+
+        const product =
+            products.find(
+                productItem =>
+                    productItem.id === item.id
+            );
+
+
+        if (!product) return;
+
+
+        const quantity =
+            Number(item.quantity);
+
+
+        if (!Number.isFinite(quantity) || quantity <= 0) {
+            return;
+        }
+
+
+        validCart.push({
+            id: product.id,
+            quantity: quantity
+        });
+
+
+        totalItems += quantity;
+
+        totalPrice +=
+            product.price * quantity;
+
+    });
+
+
+    cart = validCart;
+
+
     if (cart.length === 0) {
 
         cartItems.innerHTML = `
-
             <div class="empty-cart">
 
                 🛒
@@ -587,15 +647,12 @@ function renderCart() {
                 পছন্দের পণ্য যোগ করুন।
 
             </div>
-
         `;
 
     } else {
 
-
         cartItems.innerHTML =
             cart.map(item => {
-
 
                 const product =
                     products.find(
@@ -603,96 +660,126 @@ function renderCart() {
                     );
 
 
-                if (!product) return "";
-
-
-                const itemTotal =
-                    product.price *
-                    item.quantity;
-
-
-                totalItems +=
-                    item.quantity;
-
-
-                totalPrice +=
-                    itemTotal;
-
-
                 return `
-
                     <div class="cart-item">
-
 
                         <div class="cart-product-image">
                             ${product.icon}
                         </div>
 
-
                         <div>
-
 
                             <h4>
                                 ${product.name}
                             </h4>
 
-
                             <small>
                                 ${formatMoney(product.price)}
                             </small>
 
-
                             <div class="quantity-control">
 
-
                                 <button
-                                    onclick="changeQuantity(
-                                        ${product.id},
-                                        -1
-                                    )"
+                                    type="button"
+                                    data-action="minus"
+                                    data-product-id="${product.id}"
                                 >
                                     −
                                 </button>
-
 
                                 <span>
                                     ${item.quantity}
                                 </span>
 
-
                                 <button
-                                    onclick="changeQuantity(
-                                        ${product.id},
-                                        1
-                                    )"
+                                    type="button"
+                                    data-action="plus"
+                                    data-product-id="${product.id}"
                                 >
                                     +
                                 </button>
 
-
                             </div>
-
 
                         </div>
 
-
                         <button
+                            type="button"
                             class="remove-cart-item"
-                            onclick="removeFromCart(
-                                ${product.id}
-                            )"
+                            data-product-id="${product.id}"
                         >
-
                             মুছুন
-
                         </button>
 
-
                     </div>
-
                 `;
 
             }).join("");
+
+
+        document
+            .querySelectorAll(
+                ".quantity-control button"
+            )
+            .forEach(button => {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        const productId =
+                            Number(
+                                this.dataset.productId
+                            );
+
+                        const action =
+                            this.dataset.action;
+
+                        if (action === "plus") {
+
+                            changeQuantity(
+                                productId,
+                                1
+                            );
+
+                        } else {
+
+                            changeQuantity(
+                                productId,
+                                -1
+                            );
+
+                        }
+
+                    }
+                );
+
+            });
+
+
+        document
+            .querySelectorAll(
+                ".remove-cart-item"
+            )
+            .forEach(button => {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        const productId =
+                            Number(
+                                this.dataset.productId
+                            );
+
+                        removeFromCart(
+                            productId
+                        );
+
+                    }
+                );
+
+            });
 
     }
 
@@ -829,8 +916,6 @@ function setupMobileMenu() {
     );
 
 
-    /* Close mobile menu after clicking link */
-
     navigation
         .querySelectorAll("a")
         .forEach(link => {
@@ -920,7 +1005,6 @@ function setupCheckout() {
         "click",
         function () {
 
-
             if (cart.length === 0) {
 
                 alert(
@@ -947,11 +1031,6 @@ function setupCheckout() {
 ===================================================== */
 
 function showMessage(message) {
-
-    /*
-       ছোট একটি temporary notification
-    */
-
 
     const oldMessage =
         document.querySelector(
@@ -981,42 +1060,32 @@ function showMessage(message) {
     messageBox.style.position =
         "fixed";
 
-
     messageBox.style.bottom =
         "25px";
-
 
     messageBox.style.left =
         "50%";
 
-
     messageBox.style.transform =
         "translateX(-50%)";
-
 
     messageBox.style.background =
         "#166534";
 
-
     messageBox.style.color =
         "#ffffff";
-
 
     messageBox.style.padding =
         "10px 18px";
 
-
     messageBox.style.borderRadius =
         "8px";
-
 
     messageBox.style.zIndex =
         "999";
 
-
     messageBox.style.fontSize =
         "13px";
-
 
     messageBox.style.boxShadow =
         "0 8px 25px rgba(0,0,0,0.15)";
@@ -1030,7 +1099,9 @@ function showMessage(message) {
     setTimeout(
         function () {
 
-            messageBox.remove();
+            if (messageBox.parentNode) {
+                messageBox.remove();
+            }
 
         },
         2000
@@ -1066,7 +1137,15 @@ function initializeShop() {
 
 /* ================= START ================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    initializeShop
-);
+if (document.readyState === "loading") {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initializeShop
+    );
+
+} else {
+
+    initializeShop();
+
+}
