@@ -39,7 +39,8 @@ body.modal-open {
 
 button,
 input,
-textarea {
+textarea,
+select {
     font-family: inherit;
 }
 
@@ -1093,8 +1094,12 @@ a {
     margin-bottom: 6px;
 }
 
+
+/* ================= FORM INPUTS ================= */
+
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.form-group select {
     width: 100%;
     border: 1px solid var(--border);
     border-radius: 9px;
@@ -1102,14 +1107,36 @@ a {
     outline: none;
     background: #fafcfb;
     font-size: 13px;
+}
+
+.form-group textarea {
     resize: vertical;
 }
 
+.form-group select {
+    cursor: pointer;
+    appearance: auto;
+}
+
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group select:focus {
     border-color: #79a986;
     box-shadow: 0 0 0 3px rgba(22,101,52,0.06);
 }
+
+
+/* ================= DELIVERY HELP ================= */
+
+.delivery-help {
+    display: block;
+    color: var(--muted);
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+
+/* ================= PAYMENT ================= */
 
 .payment-option {
     display: flex !important;
@@ -1142,6 +1169,9 @@ a {
     background: var(--primary-dark);
     transform: translateY(-2px);
 }
+
+
+/* ================= CHECKOUT ITEMS ================= */
 
 .checkout-items {
     max-height: 250px;
@@ -1184,6 +1214,9 @@ a {
     font-weight: 800;
     color: var(--primary);
 }
+
+
+/* ================= SUMMARY ================= */
 
 .summary-line {
     display: flex;
