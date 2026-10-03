@@ -1,201 +1,230 @@
-let products = JSON.parse(localStorage.getItem("products")) || [];
-let totalSale = parseFloat(localStorage.getItem("totalSale")) || 0;
-let totalDue = parseFloat(localStorage.getItem("totalDue")) || 0;
-let lastInvoice = null;
+/* =====================================================
+   IMRAN SHOP - E-COMMERCE
+   Main JavaScript
+===================================================== */
 
-const shop = {
-name: "Imran Electronics",
-address: "Rahim Sardar Market, Jashore",
-phone: "01952325903"
-};
 
-function saveData(){
-localStorage.setItem("products", JSON.stringify(products));
-localStorage.setItem("totalSale", totalSale);
-localStorage.setItem("totalDue", totalDue);
+/* ================= PRODUCT CATEGORIES ================= */
+
+const categories = [
+    {
+        name: "ইলেকট্রনিক্স",
+        icon: "📱"
+    },
+    {
+        name: "ফ্যাশন",
+        icon: "👕"
+    },
+    {
+        name: "গ্রোসারি",
+        icon: "🛒"
+    },
+    {
+        name: "হোম & লিভিং",
+        icon: "🏠"
+    },
+    {
+        name: "কসমেটিকস",
+        icon: "💄"
+    },
+    {
+        name: "অন্যান্য",
+        icon: "🎁"
+    }
+];
+
+
+/* ================= PRODUCTS ================= */
+
+const products = [
+
+    {
+        id: 1,
+        name: "স্মার্টফোন",
+        category: "ইলেকট্রনিক্স",
+        price: 15999,
+        oldPrice: 17999,
+        icon: "📱"
+    },
+
+    {
+        id: 2,
+        name: "ব্লুটুথ হেডফোন",
+        category: "ইলেকট্রনিক্স",
+        price: 1299,
+        oldPrice: 1599,
+        icon: "🎧"
+    },
+
+    {
+        id: 3,
+        name: "ক্যাজুয়াল টি-শার্ট",
+        category: "ফ্যাশন",
+        price: 699,
+        oldPrice: 899,
+        icon: "👕"
+    },
+
+    {
+        id: 4,
+        name: "ফ্যাশন ব্যাগ",
+        category: "ফ্যাশন",
+        price: 1199,
+        oldPrice: 1499,
+        icon: "👜"
+    },
+
+    {
+        id: 5,
+        name: "প্রিমিয়াম চাল ৫ কেজি",
+        category: "গ্রোসারি",
+        price: 650,
+        oldPrice: 720,
+        icon: "🍚"
+    },
+
+    {
+        id: 6,
+        name: "কিচেন সেট",
+        category: "হোম & লিভিং",
+        price: 899,
+        oldPrice: 1099,
+        icon: "🍳"
+    },
+
+    {
+        id: 7,
+        name: "বিউটি কেয়ার সেট",
+        category: "কসমেটিকস",
+        price: 799,
+        oldPrice: 999,
+        icon: "💄"
+    },
+
+    {
+        id: 8,
+        name: "স্টাইলিশ ঘড়ি",
+        category: "অন্যান্য",
+        price: 999,
+        oldPrice: 1299,
+        icon: "⌚"
+    }
+
+];
+
+
+/* ================= CART ================= */
+
+let cart = JSON.parse(
+    localStorage.getItem("imranShopCart")
+) || [];
+
+
+/* ================= CURRENT FILTER ================= */
+
+let activeCategory = "সব";
+
+
+/* ================= MONEY FORMAT ================= */
+
+function formatMoney(amount) {
+
+    return "৳" + amount.toLocaleString("bn-BD");
+
 }
 
-function renderProducts(){
-let table=document.getElementById("productTable");
-let select=document.getElementById("productSelect");
 
-table.innerHTML="";
-select.innerHTML="";
+/* =====================================================
+   CATEGORY DISPLAY
+===================================================== */
 
-products.forEach((p,index)=>{
+function renderCategories() {
 
-table.innerHTML+=`
-<tr>
-<td>${p.name}</td>
-<td>${p.price}</td>
-<td>${p.stock}</td>
-<td><button onclick="deleteProduct(${index})">❌</button></td>
-</tr>
-`;
+    const categoryGrid =
+        document.getElementById("categoryGrid");
 
-let option=document.createElement("option");
-option.value=p.name;
-option.textContent=p.name+" (স্টক:"+p.stock+")";
-select.appendChild(option);
 
-});
+    if (!categoryGrid) return;
+
+
+    categoryGrid.innerHTML = categories.map(
+        category => {
+
+            return `
+
+                <button
+                    class="category-card"
+                    data-category="${category.name}"
+                    onclick="selectCategory('${category.name}')"
+                >
+
+                    <div class="category-icon">
+                        ${category.icon}
+                    </div>
+
+                    <span>
+                        ${category.name}
+                    </span>
+
+                </button>
+
+            `;
+
+        }
+    ).join("");
+
 }
 
-function addProduct(){
-let name=pName.value.trim();
-let price=parseFloat(pPrice.value);
-let stock=parseInt(pStock.value);
 
-if(!name || price<=0 || stock<0){
-alert("সঠিক তথ্য দিন");
-return;
-}
+/* =====================================================
+   PRODUCT FILTER BUTTONS
+===================================================== */
 
-products.push({name,price,stock});
-saveData();
-renderProducts();
+function renderFilterButtons() {
 
-pName.value="";
-pPrice.value="";
-pStock.value="";
-}
+    const filterRow =
+        document.getElementById("filterRow");
 
-function deleteProduct(index){
-if(confirm("ডিলিট করবেন?")){
-products.splice(index,1);
-saveData();
-renderProducts();
-}
-}
 
-function autoCalculate(){
-let name=productSelect.value;
-let qty=parseInt(qtyInput.value)||0;
-let product=products.find(p=>p.name===name);
-if(product){
-autoTotal.innerText=product.price*qty;
-}
-}
+    if (!filterRow) return;
 
-function sellProduct(){
 
-let customerName=document.getElementById("customerName").value||"Walk-in";
-let customerPhone=document.getElementById("customerPhone").value||"-";
-let name=productSelect.value;
-let qty=parseInt(document.getElementById("qty").value);
+    filterRow.innerHTML = `
 
-let product=products.find(p=>p.name===name);
+        <button
+            class="filter-button active"
+            data-category="সব"
+        >
+            সব পণ্য
+        </button>
 
-if(!product || qty<=0 || product.stock<qty){
-alert("সমস্যা আছে");
-return;
-}
+        ${categories.map(category => `
 
-let amount=product.price*qty;
-let paid=parseFloat(prompt("কত টাকা পেয়েছেন?"));
+            <button
+                class="filter-button"
+                data-category="${category.name}"
+            >
+                ${category.name}
+            </button>
 
-if(isNaN(paid) || paid<0){
-alert("সঠিক Paid দিন");
-return;
-}
+        `).join("")}
 
-let due=amount-paid;
+    `;
 
-product.stock-=qty;
-totalSale+=amount;
-if(due>0) totalDue+=due;
 
-lastInvoice={
-customerName,
-customerPhone,
-product:name,
-qty,
-price:product.price,
-amount,
-paid,
-due:due>0?due:0,
-date:new Date().toLocaleString()
-};
+    const buttons =
+        document.querySelectorAll(".filter-button");
 
-saveData();
-renderProducts();
-updateSummary();
 
-document.getElementById("qty").value="";
-autoTotal.innerText=0;
+    buttons.forEach(button => {
 
-alert("বিক্রয় সম্পন্ন");
-}
+        button.addEventListener(
+            "click",
+            function () {
 
-function updateSummary(){
-totalSaleSpan=document.getElementById("totalSale");
-totalDueSpan=document.getElementById("totalDue");
-totalSaleSpan.innerText=totalSale;
-totalDueSpan.innerText=totalDue;
-}
+                selectCategory(
+                    this.dataset.category
+                );
 
-function printInvoice(){
-
-if(!lastInvoice){
-alert("আগে বিক্রয় করুন");
-return;
-}
-
-let w=window.open("","","width=350,height=600");
-
-w.document.write(`
-<html>
-<head>
-<style>
-body{font-family:monospace;width:280px;margin:auto;}
-h2{text-align:center;}
-hr{border:1px dashed black;}
-p{margin:4px 0;font-size:13px;}
-.center{text-align:center;}
-.bold{font-weight:bold;}
-</style>
-</head>
-<body>
-
-<h2>${shop.name}</h2>
-<div class="center">${shop.address}</div>
-<div class="center">Mobile: ${shop.phone}</div>
-<hr>
-
-<p>Customer: ${lastInvoice.customerName}</p>
-<p>Phone: ${lastInvoice.customerPhone}</p>
-<hr>
-
-<p>পণ্য: ${lastInvoice.product}</p>
-<p>Qty: ${lastInvoice.qty}</p>
-<p>Price: ${lastInvoice.price}</p>
-<hr>
-
-<p class="bold">মোট: ${lastInvoice.amount} ৳</p>
-<p>Paid: ${lastInvoice.paid} ৳</p>
-<p>Due: ${lastInvoice.due} ৳</p>
-<hr>
-
-<p>Date: ${lastInvoice.date}</p>
-
-<div class="center">ধন্যবাদ ❤️</div>
-
-</body>
-</html>
-`);
-
-w.document.close();
-w.print();
-}
-
-document.getElementById("qty").addEventListener("input",()=>{
-let name=document.getElementById("productSelect").value;
-let qty=parseInt(document.getElementById("qty").value)||0;
-let product=products.find(p=>p.name===name);
-if(product){
-document.getElementById("autoTotal").innerText=product.price*qty;
-}
-});
-
-renderProducts();
-updateSummary();
+            }
+       
