@@ -12,806 +12,1241 @@
     >
 
     <link rel="stylesheet" href="style.css">
-
-    <script src="script.js?v=5" defer></script>
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
+    <!-- ================= HEADER ================= -->
 
-<header class="top-header">
-    <div class="container header-top-inner">
-        <div>🚚 সারাদেশে দ্রুত ডেলিভারি</div>
-        <div>📞 01952325903</div>
-    </div>
-</header>
+    <header class="top-header">
 
+        <div class="container top-header-content">
 
-<!-- ================= NAVBAR ================= -->
+            <p>🚚 সারাদেশে দ্রুত ডেলিভারি</p>
 
-<nav class="navbar">
-    <div class="container nav-inner">
-
-        <a href="#home" class="logo">
-            <span class="logo-icon">🛍️</span>
-
-            <span>
-                <strong>ইমরান শপ</strong>
-                <small>ইলেকট্রনিক্স অ্যান্ড মোবাইল সার্ভিসিং সেন্টার</small>
-            </span>
-        </a>
-
-        <button
-            type="button"
-            class="mobile-menu-button"
-            id="mobileMenuButton"
-            aria-label="Menu"
-        >
-            ☰
-        </button>
-
-        <div class="nav-links" id="navLinks">
-            <a href="#home">হোম</a>
-            <a href="#categories">ক্যাটাগরি</a>
-            <a href="#products">পণ্য</a>
-            <a href="#about">আমাদের সম্পর্কে</a>
-            <a href="#orderManagement">অর্ডার ম্যানেজমেন্ট</a>
-        </div>
-
-        <button
-            type="button"
-            class="cart-button"
-            id="cartButton"
-        >
-            🛒 কার্ট
-            <span id="cartCount">0</span>
-        </button>
-
-    </div>
-</nav>
-
-
-<main>
-
-<!-- ================= HERO ================= -->
-
-<section class="hero" id="home">
-    <div class="container hero-inner">
-
-        <div class="hero-content">
-
-            <span class="hero-badge">
-                🛒 আপনার বিশ্বস্ত অনলাইন শপ
-            </span>
-
-            <h1>
-                আপনার প্রয়োজনীয় পণ্য
-                <span>এক জায়গায়</span>
-            </h1>
-
-            <p>
-                ইলেকট্রনিক্স, ফ্যাশন, গ্রোসারি, হোম & লিভিং,
-                কসমেটিকসসহ বিভিন্ন প্রয়োজনীয় পণ্য এখন অনলাইনে অর্ডার করুন।
-            </p>
-
-            <div class="hero-actions">
-                <a href="#products" class="btn btn-primary">
-                    🛍️ পণ্য দেখুন
-                </a>
-
-                <a href="#categories" class="btn btn-outline">
-                    📂 ক্যাটাগরি
-                </a>
-            </div>
+            <p>📞 যোগাযোগ: 01952325903</p>
 
         </div>
 
-        <div class="hero-card">
-            <div class="hero-card-icon">🛍️</div>
-            <h3>ইমরান শপ</h3>
-            <p>সহজ অর্ডার • দ্রুত ডেলিভারি • Cash on Delivery</p>
-        </div>
-
-    </div>
-</section>
+    </header>
 
 
-<!-- ================= FEATURES ================= -->
+    <!-- ================= NAVBAR ================= -->
 
-<section class="features-section">
-    <div class="container features-grid">
+    <nav class="navbar">
 
-        <div class="feature-card">
-            <div class="feature-icon">🚚</div>
-            <div>
-                <h3>সারাদেশে ডেলিভারি</h3>
-                <p>বাংলাদেশের ৬৪ জেলায়</p>
-            </div>
-        </div>
+        <div class="container navbar-content">
 
-        <div class="feature-card">
-            <div class="feature-icon">💵</div>
-            <div>
-                <h3>Cash on Delivery</h3>
-                <p>পণ্য হাতে পেয়ে মূল্য পরিশোধ</p>
-            </div>
-        </div>
+            <a href="#" class="logo">
 
-        <div class="feature-card">
-            <div class="feature-icon">🛡️</div>
-            <div>
-                <h3>সহজ অর্ডার</h3>
-                <p>সহজ ও দ্রুত Checkout</p>
-            </div>
-        </div>
-
-        <div class="feature-card">
-            <div class="feature-icon">📞</div>
-            <div>
-                <h3>যোগাযোগ</h3>
-                <p>01952325903</p>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-
-<!-- ================= CATEGORIES ================= -->
-
-<section class="section" id="categories">
-    <div class="container">
-
-        <div class="section-heading">
-            <span>📂</span>
-            <h2>পণ্য ক্যাটাগরি</h2>
-            <p>আপনার পছন্দের ক্যাটাগরি নির্বাচন করুন</p>
-        </div>
-
-        <div id="categoryGrid" class="category-grid"></div>
-
-    </div>
-</section>
-
-
-<!-- ================= PRODUCTS ================= -->
-
-<section class="section products-section" id="products">
-    <div class="container">
-
-        <div class="section-heading">
-            <span>🛍️</span>
-            <h2>আমাদের পণ্য</h2>
-            <p>পছন্দের পণ্য কার্টে যোগ করুন</p>
-        </div>
-
-        <div class="product-tools">
-
-            <div class="search-box">
-                <span>🔎</span>
-                <input
-                    type="search"
-                    id="searchInput"
-                    placeholder="পণ্যের নাম দিয়ে খুঁজুন..."
-                >
-            </div>
-
-            <div
-                class="filter-row"
-                id="filterRow"
-            ></div>
-
-        </div>
-
-        <div
-            class="product-grid"
-            id="productGrid"
-        ></div>
-
-    </div>
-</section>
-
-
-<!-- ================= ABOUT ================= -->
-
-<section class="section about-section" id="about">
-    <div class="container">
-
-        <div class="about-card">
-
-            <div class="about-icon">🏪</div>
-
-            <div>
-                <h2>ইমরান ইলেকট্রনিক্স অ্যান্ড মোবাইল সার্ভিসিং সেন্টার</h2>
-
-                <p>
-                    আমাদের লক্ষ্য হলো সহজ, সুন্দর ও বিশ্বস্তভাবে
-                    গ্রাহকদের কাছে প্রয়োজনীয় পণ্য পৌঁছে দেওয়া।
-                </p>
-
-                <p class="shop-address">
-                    📍 গদখালি বাজার বাস স্ট্যান্ড,
-                    রহিম সরদার মার্কেট,
-                    ঝিকরগাছা, যশোর।
-                </p>
-
-                <p>
-                    📞 যোগাযোগ: <strong>01952325903</strong>
-                </p>
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
-
-<!-- ================= ORDER MANAGEMENT ================= -->
-
-<section class="section order-management-section" id="orderManagement">
-
-    <div class="container">
-
-        <div class="section-heading">
-            <span>📋</span>
-            <h2>অর্ডার ম্যানেজমেন্ট</h2>
-            <p>আপনার সংরক্ষিত অর্ডারগুলো পরিচালনা করুন</p>
-        </div>
-
-
-        <!-- ORDER STATISTICS -->
-
-        <div class="management-stats">
-
-            <div class="management-stat">
-                <span>📦</span>
-                <div>
-                    <strong id="totalOrdersCount">0</strong>
-                    <small>মোট অর্ডার</small>
+                <div class="logo-icon">
+                    🛍️
                 </div>
-            </div>
 
-            <div class="management-stat">
-                <span>⏳</span>
-                <div>
-                    <strong id="pendingOrdersCount">0</strong>
-                    <small>Pending</small>
+                <div class="logo-text">
+
+                    <strong>
+                        ইমরান শপ
+                    </strong>
+
+                    <span>
+                        ইলেকট্রনিক্স অ্যান্ড মোবাইল সার্ভিসিং সেন্টার
+                    </span>
+
                 </div>
-            </div>
 
-            <div class="management-stat">
-                <span>🚚</span>
-                <div>
-                    <strong id="shippedOrdersCount">0</strong>
-                    <small>Shipped</small>
-                </div>
-            </div>
+            </a>
 
-            <div class="management-stat">
-                <span>✅</span>
-                <div>
-                    <strong id="deliveredOrdersCount">0</strong>
-                    <small>Delivered</small>
-                </div>
-            </div>
-
-            <div class="management-stat">
-                <span>❌</span>
-                <div>
-                    <strong id="cancelledOrdersCount">0</strong>
-                    <small>Cancelled</small>
-                </div>
-            </div>
-
-        </div>
-
-
-        <!-- ORDER TOOLS -->
-
-        <div class="management-tools">
-
-            <div class="management-search">
-                <span>🔎</span>
-
-                <input
-                    type="search"
-                    id="orderSearchInput"
-                    placeholder="Order ID, নাম অথবা ফোন দিয়ে খুঁজুন..."
-                >
-            </div>
-
-            <select id="orderStatusFilter">
-                <option value="সব">সব অর্ডার</option>
-                <option value="Pending">Pending</option>
-                <option value="Confirmed">Confirmed</option>
-                <option value="Processing">Processing</option>
-                <option value="Shipped">Shipped</option>
-                <option value="Delivered">Delivered</option>
-                <option value="Cancelled">Cancelled</option>
-            </select>
 
             <button
-                type="button"
-                class="btn btn-outline management-refresh"
-                id="refreshOrdersButton"
+                class="menu-button"
+                id="menuButton"
+                aria-label="Menu"
             >
-                🔄 Refresh
+                ☰
             </button>
 
-        </div>
 
+            <div
+                class="navigation"
+                id="navigation"
+            >
 
-        <!-- ORDER LIST -->
+                <a href="#home">
+                    হোম
+                </a>
 
-        <div
-            class="orders-list"
-            id="ordersList"
-        ></div>
-
-    </div>
-
-</section>
-
-</main>
-
-
-<!-- ================= CART ================= -->
-
-<div
-    class="overlay"
-    id="cartOverlay"
-></div>
-
-<aside
-    class="cart-drawer"
-    id="cartDrawer"
->
-
-    <div class="drawer-header">
-
-        <div>
-            <h2>🛒 আপনার কার্ট</h2>
-            <span id="cartDrawerCount">0 টি পণ্য</span>
-        </div>
-
-        <button
-            type="button"
-            class="close-button"
-            id="closeCartButton"
-        >
-            ×
-        </button>
-
-    </div>
-
-    <div
-        class="cart-items"
-        id="cartItems"
-    ></div>
-
-    <div class="cart-footer">
-
-        <div class="cart-total-row">
-            <span>সর্বমোট</span>
-            <strong id="cartTotal">৳0</strong>
-        </div>
-
-        <button
-            type="button"
-            class="btn btn-primary btn-full"
-            id="checkoutButton"
-        >
-            Checkout করুন
-        </button>
-
-    </div>
-
-</aside>
-
-
-<!-- ================= PRODUCT DETAILS MODAL ================= -->
-
-<div
-    class="modal-overlay"
-    id="productModalOverlay"
->
-
-    <div class="modal product-modal">
-
-        <button
-            type="button"
-            class="modal-close"
-            id="closeProductModalButton"
-        >
-            ×
-        </button>
-
-        <div class="product-detail-grid">
-
-            <div class="product-detail-image" id="modalProductImage">
-                📦
-            </div>
-
-            <div class="product-detail-content">
-
-                <span
-                    class="product-category"
-                    id="modalProductCategory"
-                >
+                <a href="#categories">
                     ক্যাটাগরি
-                </span>
+                </a>
 
-                <h2 id="modalProductName">
-                    পণ্যের নাম
-                </h2>
+                <a href="#products">
+                    পণ্য
+                </a>
 
-                <div class="modal-price-row">
-                    <strong id="modalProductPrice">৳0</strong>
-                    <del id="modalProductOldPrice">৳0</del>
-                </div>
+                <a href="#about">
+                    আমাদের সম্পর্কে
+                </a>
 
-                <p id="modalProductDescription">
-                    পণ্যের বিবরণ
-                </p>
+                <a href="#orderManagement">
+                    অর্ডার
+                </a>
 
-                <div class="quantity-control">
+                <button
+                    class="cart-button"
+                    id="cartButton"
+                >
 
-                    <button
-                        type="button"
-                        id="modalQtyMinus"
-                    >
-                        −
-                    </button>
+                    🛒 কার্ট
 
-                    <span id="modalQuantity">1</span>
+                    <span id="cartCount">
+                        0
+                    </span>
 
-                    <button
-                        type="button"
-                        id="modalQtyPlus"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-                <div class="modal-actions">
-
-                    <button
-                        type="button"
-                        class="btn btn-primary"
-                        id="modalAddCartButton"
-                    >
-                        🛒 কার্টে যোগ করুন
-                    </button>
-
-                    <button
-                        type="button"
-                        class="btn btn-accent"
-                        id="modalBuyNowButton"
-                    >
-                        ⚡ Buy Now
-                    </button>
-
-                </div>
+                </button>
 
             </div>
 
         </div>
 
-    </div>
-
-</div>
+    </nav>
 
 
-<!-- ================= CHECKOUT MODAL ================= -->
+    <!-- ================= MAIN ================= -->
 
-<div
-    class="modal-overlay"
-    id="checkoutOverlay"
->
-
-    <div class="modal checkout-modal">
-
-        <button
-            type="button"
-            class="modal-close"
-            id="closeCheckoutButton"
-        >
-            ×
-        </button>
+    <main id="home">
 
 
-        <!-- CHECKOUT FORM -->
+        <!-- ================= HERO ================= -->
 
-        <div id="checkoutFormView">
+        <section class="hero-section">
 
-            <div class="checkout-header">
-                <span>🧾</span>
-                <h2>Checkout</h2>
-                <p>আপনার তথ্য দিয়ে অর্ডার সম্পন্ন করুন</p>
+            <div class="container hero-content">
+
+                <div class="hero-text">
+
+                    <span class="hero-label">
+                        ✨ বিশ্বস্ত অনলাইন শপ
+                    </span>
+
+                    <h1>
+                        আপনার পছন্দের পণ্য,
+                        <span>
+                            এখন হাতের মুঠোয়
+                        </span>
+                    </h1>
+
+                    <p>
+                        বিভিন্ন ক্যাটাগরির প্রয়োজনীয় পণ্য
+                        এক জায়গায়। সহজ অর্ডার, নির্ভরযোগ্য
+                        সেবা এবং দ্রুত ডেলিভারি।
+                    </p>
+
+
+                    <div class="hero-buttons">
+
+                        <a
+                            href="#products"
+                            class="primary-button"
+                        >
+                            শপিং শুরু করুন →
+                        </a>
+
+                        <a
+                            href="#categories"
+                            class="secondary-button"
+                        >
+                            ক্যাটাগরি দেখুন
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hero-card">
+
+                    <div class="offer-badge">
+                        🔥 বিশেষ অফার
+                    </div>
+
+                    <div class="hero-icon">
+                        🛒
+                    </div>
+
+                    <h2>
+                        নতুন পণ্য আসছে
+                    </h2>
+
+                    <p>
+                        নিয়মিত নতুন পণ্য ও বিশেষ অফার
+                        যোগ করা হবে।
+                    </p>
+
+                </div>
+
             </div>
 
-
-            <form id="checkoutForm">
-
-                <div class="form-group">
-                    <label for="customerName">
-                        আপনার নাম *
-                    </label>
-
-                    <input
-                        type="text"
-                        id="customerName"
-                        placeholder="পূর্ণ নাম লিখুন"
-                        required
-                    >
-                </div>
+        </section>
 
 
-                <div class="form-group">
-                    <label for="customerPhone">
-                        মোবাইল নম্বর *
-                    </label>
+        <!-- ================= FEATURES ================= -->
 
-                    <input
-                        type="tel"
-                        id="customerPhone"
-                        placeholder="01XXXXXXXXX"
-                        required
-                    >
-                </div>
+        <section class="features-section">
 
+            <div class="container features-grid">
 
-                <div class="form-group">
+                <div class="feature">
 
-                    <label for="customerDistrict">
-                        জেলা *
-                    </label>
+                    <div class="feature-icon">
+                        🚚
+                    </div>
 
-                    <select
-                        id="customerDistrict"
-                        required
-                    >
+                    <div>
 
-                        <option value="">
-                            জেলা নির্বাচন করুন
-                        </option>
+                        <strong>
+                            দ্রুত ডেলিভারি
+                        </strong>
 
-                        <option>ঢাকা</option>
-                        <option>ফরিদপুর</option>
-                        <option>গাজীপুর</option>
-                        <option>গোপালগঞ্জ</option>
-                        <option>কিশোরগঞ্জ</option>
-                        <option>মাদারীপুর</option>
-                        <option>মানিকগঞ্জ</option>
-                        <option>মুন্সিগঞ্জ</option>
-                        <option>নারায়ণগঞ্জ</option>
-                        <option>নরসিংদী</option>
-                        <option>রাজবাড়ী</option>
-                        <option>শরীয়তপুর</option>
-                        <option>টাঙ্গাইল</option>
+                        <p>
+                            নিরাপদে পণ্য পৌঁছে দিই
+                        </p>
 
-                        <option>বাগেরহাট</option>
-                        <option>চুয়াডাঙ্গা</option>
-                        <option>যশোর</option>
-                        <option>ঝিনাইদহ</option>
-                        <option>খুলনা</option>
-                        <option>কুষ্টিয়া</option>
-                        <option>মাগুরা</option>
-                        <option>মেহেরপুর</option>
-                        <option>নড়াইল</option>
-                        <option>সাতক্ষীরা</option>
-
-                        <option>বান্দরবান</option>
-                        <option>ব্রাহ্মণবাড়িয়া</option>
-                        <option>চাঁদপুর</option>
-                        <option>চট্টগ্রাম</option>
-                        <option>কুমিল্লা</option>
-                        <option>কক্সবাজার</option>
-                        <option>ফেনী</option>
-                        <option>খাগড়াছড়ি</option>
-                        <option>লক্ষ্মীপুর</option>
-                        <option>নোয়াখালী</option>
-                        <option>রাঙ্গামাটি</option>
-
-                        <option>বগুড়া</option>
-                        <option>জয়পুরহাট</option>
-                        <option>নওগাঁ</option>
-                        <option>নাটোর</option>
-                        <option>চাঁপাইনবাবগঞ্জ</option>
-                        <option>পাবনা</option>
-                        <option>রাজশাহী</option>
-                        <option>সিরাজগঞ্জ</option>
-
-                        <option>বরগুনা</option>
-                        <option>বরিশাল</option>
-                        <option>ভোলা</option>
-                        <option>ঝালকাঠি</option>
-                        <option>পটুয়াখালী</option>
-                        <option>পিরোজপুর</option>
-
-                        <option>হবিগঞ্জ</option>
-                        <option>মৌলভীবাজার</option>
-                        <option>সুনামগঞ্জ</option>
-                        <option>সিলেট</option>
-
-                        <option>দিনাজপুর</option>
-                        <option>গাইবান্ধা</option>
-                        <option>কুড়িগ্রাম</option>
-                        <option>লালমনিরহাট</option>
-                        <option>নীলফামারী</option>
-                        <option>পঞ্চগড়</option>
-                        <option>রংপুর</option>
-                        <option>ঠাকুরগাঁও</option>
-
-                        <option>জামালপুর</option>
-                        <option>ময়মনসিংহ</option>
-                        <option>নেত্রকোণা</option>
-                        <option>শেরপুর</option>
-
-                    </select>
-
-                    <small class="delivery-help">
-                        যশোর: ৳80 | অন্যান্য জেলা: ৳150
-                    </small>
+                    </div>
 
                 </div>
 
 
-                <div class="form-group">
+                <div class="feature">
 
-                    <label for="customerAddress">
-                        সম্পূর্ণ ঠিকানা *
-                    </label>
+                    <div class="feature-icon">
+                        🔒
+                    </div>
 
-                    <textarea
-                        id="customerAddress"
-                        rows="3"
-                        placeholder="বাড়ি/রোড/গ্রাম/থানা ইত্যাদি লিখুন"
-                        required
-                    ></textarea>
+                    <div>
+
+                        <strong>
+                            নিরাপদ কেনাকাটা
+                        </strong>
+
+                        <p>
+                            আপনার তথ্য সুরক্ষিত
+                        </p>
+
+                    </div>
 
                 </div>
 
 
-                <div class="payment-box">
+                <div class="feature">
 
-                    <strong>💵 পেমেন্ট পদ্ধতি</strong>
+                    <div class="feature-icon">
+                        💬
+                    </div>
 
-                    <label class="payment-option">
+                    <div>
+
+                        <strong>
+                            কাস্টমার সাপোর্ট
+                        </strong>
+
+                        <p>
+                            প্রয়োজন হলে যোগাযোগ করুন
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ↩️
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            সহজ রিটার্ন
+                        </strong>
+
+                        <p>
+                            নীতিমালা অনুযায়ী রিটার্ন
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CATEGORY ================= -->
+
+        <section
+            class="section"
+            id="categories"
+        >
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            ক্যাটাগরি
+                        </span>
+
+                        <h2>
+                            আপনার প্রয়োজন অনুযায়ী
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="category-grid"
+                    id="categoryGrid"
+                >
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= PRODUCTS ================= -->
+
+        <section
+            class="section products-section"
+            id="products"
+        >
+
+            <div class="container">
+
+                <div class="products-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            জনপ্রিয় পণ্য
+                        </span>
+
+                        <h2>
+                            আমাদের পণ্য
+                        </h2>
+
+                    </div>
+
+
+                    <div class="search-box">
+
                         <input
-                            type="radio"
-                            name="paymentMethod"
-                            value="Cash on Delivery"
-                            checked
+                            type="search"
+                            id="searchInput"
+                            placeholder="পণ্য খুঁজুন..."
+                            autocomplete="off"
                         >
 
                         <span>
-                            Cash on Delivery
+                            🔍
                         </span>
-                    </label>
 
-                </div>
-
-
-                <!-- CHECKOUT SUMMARY -->
-
-                <div class="checkout-summary">
-
-                    <h3>অর্ডার সামারি</h3>
-
-                    <div
-                        id="checkoutItems"
-                        class="checkout-items"
-                    ></div>
-
-                    <div class="summary-row">
-                        <span>পণ্যের মূল্য</span>
-                        <strong id="checkoutSubtotal">৳0</strong>
-                    </div>
-
-                    <div class="summary-row">
-                        <span>ডেলিভারি চার্জ</span>
-                        <strong id="checkoutDelivery">
-                            জেলা নির্বাচন করুন
-                        </strong>
-                    </div>
-
-                    <div class="summary-grand">
-                        <span>সর্বমোট</span>
-                        <strong id="checkoutGrandTotal">৳0</strong>
                     </div>
 
                 </div>
 
 
-                <button
-                    type="submit"
-                    class="btn btn-primary btn-full"
+                <div
+                    class="filter-row"
+                    id="filterRow"
                 >
-                    ✅ অর্ডার নিশ্চিত করুন
-                </button>
-
-            </form>
-
-        </div>
+                </div>
 
 
-        <!-- ORDER SUCCESS -->
+                <div
+                    class="product-grid"
+                    id="productGrid"
+                >
+                </div>
 
-        <div
-            id="orderSuccessView"
-            class="order-success"
-            hidden
-        >
-
-            <div class="success-icon">✅</div>
-
-            <h2>অর্ডার সফল হয়েছে!</h2>
-
-            <p>
-                আপনার অর্ডারটি সফলভাবে গ্রহণ করা হয়েছে।
-            </p>
-
-            <div class="success-order-id">
-                <span>Order ID</span>
-                <strong id="successOrderId">
-                    IMS-00000000-00000
-                </strong>
             </div>
 
-            <div
-                id="successOrderSummary"
-                class="success-summary"
-            ></div>
+        </section>
+
+
+        <!-- ================= ABOUT ================= -->
+
+        <section
+            class="section about-section"
+            id="about"
+        >
+
+            <div class="container">
+
+                <div class="about-box">
+
+                    <div class="about-content">
+
+                        <span class="section-label">
+                            আমাদের সম্পর্কে
+                        </span>
+
+                        <h2>
+                            ইমরান শপে স্বাগতম
+                        </h2>
+
+                        <p>
+                            ইমরান ইলেকট্রনিক্স অ্যান্ড মোবাইল
+                            সার্ভিসিং সেন্টারকে কেন্দ্র করে আমরা
+                            একটি আধুনিক General E-commerce
+                            প্ল্যাটফর্ম তৈরি করছি।
+                        </p>
+
+                        <p>
+                            ভবিষ্যতে বিভিন্ন ধরনের পণ্য এখানে
+                            পাওয়া যাবে।
+                        </p>
+
+                    </div>
+
+
+                    <div class="shop-address">
+
+                        <strong>
+                            📍 আমাদের ঠিকানা
+                        </strong>
+
+                        <p>
+                            গদখালি বাজার বাস স্ট্যান্ড,
+                            <br>
+                            রহিম সরদার মার্কেট,
+                            <br>
+                            ঝিকরগাছা, যশোর।
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             ORDER MANAGEMENT
+        ===================================================== -->
+
+        <section
+            class="section order-management-section"
+            id="orderManagement"
+        >
+
+            <div class="container">
+
+                <div class="order-management-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            অর্ডার ম্যানেজমেন্ট
+                        </span>
+
+                        <h2>
+                            📋 অর্ডার তালিকা
+                        </h2>
+
+                        <p>
+                            আপনার সংরক্ষিত অর্ডারগুলো এখান থেকে
+                            দেখা ও Status পরিবর্তন করা যাবে।
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= ORDER STATS ================= -->
+
+                <div
+                    class="order-stats-grid"
+                    id="orderStats"
+                >
+
+                    <div class="order-stat-card">
+
+                        <span>
+                            মোট অর্ডার
+                        </span>
+
+                        <strong id="totalOrdersCount">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="order-stat-card">
+
+                        <span>
+                            Pending
+                        </span>
+
+                        <strong id="pendingOrdersCount">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="order-stat-card">
+
+                        <span>
+                            Processing
+                        </span>
+
+                        <strong id="processingOrdersCount">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="order-stat-card">
+
+                        <span>
+                            Delivered
+                        </span>
+
+                        <strong id="deliveredOrdersCount">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= ORDER CONTROLS ================= -->
+
+                <div class="order-management-controls">
+
+                    <div class="order-search-box">
+
+                        <input
+                            type="search"
+                            id="orderSearchInput"
+                            placeholder="Order ID, নাম বা মোবাইল দিয়ে খুঁজুন..."
+                            autocomplete="off"
+                        >
+
+                        <span>
+                            🔍
+                        </span>
+
+                    </div>
+
+
+                    <select
+                        id="orderStatusFilter"
+                        class="order-status-filter"
+                    >
+
+                        <option value="সব">
+                            সব Status
+                        </option>
+
+                        <option value="Pending">
+                            Pending
+                        </option>
+
+                        <option value="Confirmed">
+                            Confirmed
+                        </option>
+
+                        <option value="Processing">
+                            Processing
+                        </option>
+
+                        <option value="Shipped">
+                            Shipped
+                        </option>
+
+                        <option value="Delivered">
+                            Delivered
+                        </option>
+
+                        <option value="Cancelled">
+                            Cancelled
+                        </option>
+
+                    </select>
+
+
+                    <button
+                        type="button"
+                        class="refresh-orders-button"
+                        id="refreshOrdersButton"
+                    >
+                        🔄 Refresh
+                    </button>
+
+                </div>
+
+
+                <!-- ================= ORDER LIST ================= -->
+
+                <div
+                    class="orders-list"
+                    id="ordersList"
+                >
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= CART OVERLAY ================= -->
+
+    <div
+        class="cart-overlay"
+        id="cartOverlay"
+    >
+    </div>
+
+
+    <!-- ================= CART DRAWER ================= -->
+
+    <aside
+        class="cart-drawer"
+        id="cartDrawer"
+    >
+
+        <div class="cart-header">
+
+            <h2>
+                🛒 আপনার কার্ট
+            </h2>
 
             <button
-                type="button"
-                class="btn btn-primary btn-full"
-                id="successCloseButton"
+                id="closeCart"
+                class="close-cart"
+                aria-label="Close cart"
             >
-                ঠিক আছে
+                ✕
             </button>
 
         </div>
 
+
+        <div
+            class="cart-items"
+            id="cartItems"
+        >
+        </div>
+
+
+        <div class="cart-footer">
+
+            <div class="cart-total">
+
+                <span>
+                    মোট
+                </span>
+
+                <strong id="cartTotal">
+                    ৳0
+                </strong>
+
+            </div>
+
+
+            <button
+                class="checkout-button"
+                id="checkoutButton"
+            >
+                চেকআউট করুন
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= PRODUCT DETAILS MODAL ================= -->
+
+    <div
+        class="product-modal-overlay"
+        id="productModalOverlay"
+    >
+
+        <div
+            class="product-modal"
+            id="productModal"
+        >
+
+            <button
+                type="button"
+                class="product-modal-close"
+                id="productModalClose"
+                aria-label="Close product details"
+            >
+                ✕
+            </button>
+
+
+            <div class="product-modal-content">
+
+                <div
+                    class="product-modal-image"
+                    id="modalProductImage"
+                >
+                    📦
+                </div>
+
+
+                <div class="product-modal-info">
+
+                    <span
+                        class="product-category"
+                        id="modalProductCategory"
+                    >
+                        ক্যাটাগরি
+                    </span>
+
+
+                    <h2 id="modalProductName">
+                        পণ্যের নাম
+                    </h2>
+
+
+                    <div class="modal-price-row">
+
+                        <strong
+                            class="product-price"
+                            id="modalProductPrice"
+                        >
+                            ৳0
+                        </strong>
+
+                        <span
+                            class="old-price"
+                            id="modalProductOldPrice"
+                        >
+                            ৳0
+                        </span>
+
+                    </div>
+
+
+                    <p
+                        class="modal-product-description"
+                        id="modalProductDescription"
+                    >
+                        পণ্যের বিস্তারিত এখানে দেখা যাবে।
+                    </p>
+
+
+                    <div class="modal-quantity">
+
+                        <span>
+                            পরিমাণ
+                        </span>
+
+
+                        <div class="quantity-control">
+
+                            <button
+                                type="button"
+                                id="modalQuantityMinus"
+                            >
+                                −
+                            </button>
+
+
+                            <strong id="modalQuantity">
+                                1
+                            </strong>
+
+
+                            <button
+                                type="button"
+                                id="modalQuantityPlus"
+                            >
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="modal-actions">
+
+                        <button
+                            type="button"
+                            class="modal-add-cart"
+                            id="modalAddCart"
+                        >
+                            🛒 কার্টে যোগ করুন
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="modal-buy-now"
+                            id="modalBuyNow"
+                        >
+                            ⚡ এখনই কিনুন
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
-</div>
+
+    <!-- =====================================================
+         CHECKOUT MODAL
+    ===================================================== -->
+
+    <div
+        class="checkout-overlay"
+        id="checkoutOverlay"
+    >
+
+        <div
+            class="checkout-modal"
+            id="checkoutModal"
+        >
+
+            <button
+                type="button"
+                class="checkout-close"
+                id="checkoutClose"
+                aria-label="Close checkout"
+            >
+                ✕
+            </button>
 
 
-<!-- ================= FOOTER ================= -->
+            <!-- ================= CHECKOUT FORM VIEW ================= -->
 
-<footer class="footer">
+            <div
+                class="checkout-form-view"
+                id="checkoutFormView"
+            >
 
-    <div class="container">
+                <div class="checkout-header">
 
-        <div class="footer-main">
+                    <span class="section-label">
+                        অর্ডার সম্পন্ন করুন
+                    </span>
 
-            <div>
-                <h3>🛍️ ইমরান শপ</h3>
+                    <h2>
+                        🛍️ Checkout
+                    </h2>
+
+                    <p>
+                        আপনার তথ্য দিয়ে অর্ডারটি নিশ্চিত করুন।
+                    </p>
+
+                </div>
+
+
+                <div class="checkout-layout">
+
+                    <!-- CUSTOMER FORM -->
+
+                    <div class="checkout-customer">
+
+                        <h3>
+                            👤 কাস্টমারের তথ্য
+                        </h3>
+
+
+                        <form id="checkoutForm">
+
+                            <div class="form-group">
+
+                                <label for="customerName">
+                                    নাম *
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="customerName"
+                                    name="customerName"
+                                    placeholder="আপনার পূর্ণ নাম"
+                                    autocomplete="name"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="customerPhone">
+                                    মোবাইল নম্বর *
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="customerPhone"
+                                    name="customerPhone"
+                                    placeholder="01XXXXXXXXX"
+                                    inputmode="numeric"
+                                    autocomplete="tel"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- ================= DISTRICT ================= -->
+
+                            <div class="form-group">
+
+                                <label for="customerDistrict">
+                                    জেলা *
+                                </label>
+
+                                <select
+                                    id="customerDistrict"
+                                    name="customerDistrict"
+                                    required
+                                >
+
+                                    <option value="">
+                                        জেলা নির্বাচন করুন
+                                    </option>
+
+                                    <option value="ঢাকা">ঢাকা</option>
+                                    <option value="ফরিদপুর">ফরিদপুর</option>
+                                    <option value="গাজীপুর">গাজীপুর</option>
+                                    <option value="গোপালগঞ্জ">গোপালগঞ্জ</option>
+                                    <option value="কিশোরগঞ্জ">কিশোরগঞ্জ</option>
+                                    <option value="মাদারীপুর">মাদারীপুর</option>
+                                    <option value="মানিকগঞ্জ">মানিকগঞ্জ</option>
+                                    <option value="মুন্সিগঞ্জ">মুন্সিগঞ্জ</option>
+                                    <option value="নারায়ণগঞ্জ">নারায়ণগঞ্জ</option>
+                                    <option value="নরসিংদী">নরসিংদী</option>
+                                    <option value="রাজবাড়ী">রাজবাড়ী</option>
+                                    <option value="শরীয়তপুর">শরীয়তপুর</option>
+                                    <option value="টাঙ্গাইল">টাঙ্গাইল</option>
+
+                                    <option value="বাগেরহাট">বাগেরহাট</option>
+                                    <option value="চুয়াডাঙ্গা">চুয়াডাঙ্গা</option>
+                                    <option value="যশোর">যশোর</option>
+                                    <option value="ঝিনাইদহ">ঝিনাইদহ</option>
+                                    <option value="খুলনা">খুলনা</option>
+                                    <option value="কুষ্টিয়া">কুষ্টিয়া</option>
+                                    <option value="মাগুরা">মাগুরা</option>
+                                    <option value="মেহেরপুর">মেহেরপুর</option>
+                                    <option value="নড়াইল">নড়াইল</option>
+                                    <option value="সাতক্ষীরা">সাতক্ষীরা</option>
+
+                                    <option value="বান্দরবান">বান্দরবান</option>
+                                    <option value="ব্রাহ্মণবাড়িয়া">ব্রাহ্মণবাড়িয়া</option>
+                                    <option value="চাঁদপুর">চাঁদপুর</option>
+                                    <option value="চট্টগ্রাম">চট্টগ্রাম</option>
+                                    <option value="কুমিল্লা">কুমিল্লা</option>
+                                    <option value="কক্সবাজার">কক্সবাজার</option>
+                                    <option value="ফেনী">ফেনী</option>
+                                    <option value="খাগড়াছড়ি">খাগড়াছড়ি</option>
+                                    <option value="লক্ষ্মীপুর">লক্ষ্মীপুর</option>
+                                    <option value="নোয়াখালী">নোয়াখালী</option>
+                                    <option value="রাঙ্গামাটি">রাঙ্গামাটি</option>
+
+                                    <option value="বগুড়া">বগুড়া</option>
+                                    <option value="জয়পুরহাট">জয়পুরহাট</option>
+                                    <option value="নওগাঁ">নওগাঁ</option>
+                                    <option value="নাটোর">নাটোর</option>
+                                    <option value="চাঁপাইনবাবগঞ্জ">চাঁপাইনবাবগঞ্জ</option>
+                                    <option value="পাবনা">পাবনা</option>
+                                    <option value="রাজশাহী">রাজশাহী</option>
+                                    <option value="সিরাজগঞ্জ">সিরাজগঞ্জ</option>
+
+                                    <option value="বরগুনা">বরগুনা</option>
+                                    <option value="বরিশাল">বরিশাল</option>
+                                    <option value="ভোলা">ভোলা</option>
+                                    <option value="ঝালকাঠি">ঝালকাঠি</option>
+                                    <option value="পটুয়াখালী">পটুয়াখালী</option>
+                                    <option value="পিরোজপুর">পিরোজপুর</option>
+
+                                    <option value="হবিগঞ্জ">হবিগঞ্জ</option>
+                                    <option value="মৌলভীবাজার">মৌলভীবাজার</option>
+                                    <option value="সুনামগঞ্জ">সুনামগঞ্জ</option>
+                                    <option value="সিলেট">সিলেট</option>
+
+                                    <option value="দিনাজপুর">দিনাজপুর</option>
+                                    <option value="গাইবান্ধা">গাইবান্ধা</option>
+                                    <option value="কুড়িগ্রাম">কুড়িগ্রাম</option>
+                                    <option value="লালমনিরহাট">লালমনিরহাট</option>
+                                    <option value="নীলফামারী">নীলফামারী</option>
+                                    <option value="পঞ্চগড়">পঞ্চগড়</option>
+                                    <option value="রংপুর">রংপুর</option>
+                                    <option value="ঠাকুরগাঁও">ঠাকুরগাঁও</option>
+
+                                    <option value="জামালপুর">জামালপুর</option>
+                                    <option value="ময়মনসিংহ">ময়মনসিংহ</option>
+                                    <option value="নেত্রকোণা">নেত্রকোণা</option>
+                                    <option value="শেরপুর">শেরপুর</option>
+
+                                </select>
+
+
+                                <small class="delivery-help">
+                                    যশোর: ৳80 | অন্যান্য জেলা: ৳150
+                                </small>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="customerAddress">
+                                    সম্পূর্ণ ঠিকানা *
+                                </label>
+
+                                <textarea
+                                    id="customerAddress"
+                                    name="customerAddress"
+                                    rows="4"
+                                    placeholder="বাড়ি/গ্রাম, ইউনিয়ন, উপজেলা, জেলা"
+                                    autocomplete="street-address"
+                                    required
+                                ></textarea>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    পেমেন্ট পদ্ধতি
+                                </label>
+
+                                <label class="payment-option">
+
+                                    <input
+                                        type="radio"
+                                        name="paymentMethod"
+                                        value="Cash on Delivery"
+                                        checked
+                                    >
+
+                                    <span>
+                                        💵 Cash on Delivery
+                                    </span>
+
+                                </label>
+
+                            </div>
+
+
+                            <button
+                                type="submit"
+                                class="place-order-button"
+                            >
+                                ✅ অর্ডার নিশ্চিত করুন
+                            </button>
+
+                        </form>
+
+                    </div>
+
+
+                    <!-- ORDER SUMMARY -->
+
+                    <div class="checkout-summary">
+
+                        <h3>
+                            🧾 অর্ডার সামারি
+                        </h3>
+
+
+                        <div
+                            class="checkout-items"
+                            id="checkoutItems"
+                        >
+                        </div>
+
+
+                        <div class="summary-line">
+
+                            <span>
+                                পণ্যের মোট
+                            </span>
+
+                            <strong id="checkoutSubtotal">
+                                ৳0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="summary-line">
+
+                            <span>
+                                ডেলিভারি চার্জ
+                            </span>
+
+                            <strong id="checkoutDelivery">
+                                জেলা নির্বাচন করুন
+                            </strong>
+
+                        </div>
+
+
+                        <div class="summary-total">
+
+                            <span>
+                                সর্বমোট
+                            </span>
+
+                            <strong id="checkoutGrandTotal">
+                                ৳0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= ORDER SUCCESS VIEW ================= -->
+
+            <div
+                class="order-success-view"
+                id="orderSuccessView"
+            >
+
+                <div class="success-icon">
+                    ✓
+                </div>
+
+                <span class="section-label">
+                    অর্ডার সফল হয়েছে
+                </span>
+
+                <h2>
+                    🎉 ধন্যবাদ!
+                </h2>
 
                 <p>
-                    ইমরান ইলেকট্রনিক্স অ্যান্ড মোবাইল সার্ভিসিং সেন্টার
+                    আপনার অর্ডারটি সফলভাবে গ্রহণ করা হয়েছে।
                 </p>
+
+
+                <div class="order-id-box">
+
+                    <span>
+                        আপনার Order ID
+                    </span>
+
+                    <strong id="successOrderId">
+                        IMS-000000
+                    </strong>
+
+                </div>
+
+
+                <div
+                    class="success-order-summary"
+                    id="successOrderSummary"
+                >
+                </div>
+
+
+                <p class="success-note">
+                    আমাদের পক্ষ থেকে প্রয়োজন অনুযায়ী
+                    আপনার সাথে যোগাযোগ করা হবে।
+                </p>
+
+
+                <button
+                    type="button"
+                    class="success-close-button"
+                    id="successCloseButton"
+                >
+                    ঠিক আছে
+                </button>
+
             </div>
 
-            <div>
-                <h4>যোগাযোগ</h4>
-                <p>📞 01952325903</p>
-                <p>📍 ঝিকরগাছা, যশোর</p>
-            </div>
-
-        </div>
-
-        <div class="footer-bottom">
-            © 2026 ইমরান ইলেকট্রনিক্স অ্যান্ড মোবাইল সার্ভিসিং সেন্টার
         </div>
 
     </div>
 
-</footer>
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="container footer-content">
+
+            <div class="footer-brand">
+
+                <strong>
+                    ইমরান শপ
+                </strong>
+
+                <p>
+                    ইমরান ইলেকট্রনিক্স অ্যান্ড
+                    মোবাইল সার্ভিসিং সেন্টার
+                </p>
+
+            </div>
+
+
+            <div class="footer-info">
+
+                <p>
+                    📍 ঝিকরগাছা, যশোর
+                </p>
+
+                <p>
+                    📞 01952325903
+                </p>
+
+            </div>
+
+
+            <div class="copyright">
+
+                © 2026 Imran Shop.
+                সর্বস্বত্ব সংরক্ষিত।
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="script.js?v=5"></script>
 
 </body>
 </html>
