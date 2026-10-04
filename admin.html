@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="ইমরান শপ - Admin Panel"
+    >
+
+    <title>ইমরান শপ | Admin Panel</title>
+
+    <link
+        rel="stylesheet"
+        href="admin.css"
+    >
+</head>
+
+<body>
+
+    <!-- =====================================================
+         ADMIN LOGIN
+    ====================================================== -->
+
+    <div
+        id="loginScreen"
+        class="login-screen"
+    >
+
+        <div class="login-card">
+
+            <div class="login-logo">
+                🛒
+            </div>
+
+            <h1>ইমরান শপ</h1>
+
+            <p class="login-subtitle">
+                Admin Panel
+            </p>
+
+            <form id="loginForm">
+
+                <div class="form-group">
+
+                    <label for="adminUsername">
+                        ইউজারনেম
+                    </label>
+
+                    <input
+                        type="text"
+                        id="adminUsername"
+                        placeholder="ইউজারনেম লিখুন"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="adminPassword">
+                        পাসওয়ার্ড
+                    </label>
+
+                    <input
+                        type="password"
+                        id="adminPassword"
+                        placeholder="পাসওয়ার্ড লিখুন"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="login-button"
+                >
+                    🔐 Login
+                </button>
+
+                <p
+                    id="loginMessage"
+                    class="login-message"
+                ></p>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         ADMIN PANEL
+    ====================================================== -->
+
+    <div
+        id="adminPanel"
+        class="admin-panel hidden"
+    >
+
+        <!-- ================= HEADER ================= -->
+
+        <header class="admin-header">
+
+            <div class="admin-header-inner">
+
+                <div class="admin-brand">
+
+                    <div class="admin-brand-icon">
+                        🛒
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            ইমরান শপ
+                        </strong>
+
+                        <span>
+                            Admin Panel
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="admin-header-actions">
+
+                    <a
+                        href="index.html"
+                        class="view-store-button"
+                    >
+                        🏪 Shop দেখুন
+                    </a>
+
+                    <button
+                        id="logoutButton"
+                        class="logout-button"
+                    >
+                        🚪 Logout
+                    </button>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= MAIN ================= -->
+
+        <main class="admin-main">
+
+            <div class="admin-container">
+
+
+                <!-- ================= PAGE TITLE ================= -->
+
+                <section class="admin-page-heading">
+
+                    <div>
+
+                        <span class="page-label">
+                            CONTROL PANEL
+                        </span>
+
+                        <h1>
+                            ড্যাশবোর্ড
+                        </h1>
+
+                        <p>
+                            আপনার অনলাইন শপের অর্ডার ও বিক্রয়ের তথ্য এখানে দেখুন।
+                        </p>
+
+                    </div>
+
+                    <button
+                        id="refreshDashboardButton"
+                        class="refresh-button"
+                    >
+                        🔄 Refresh
+                    </button>
+
+                </section>
+
+
+                <!-- =================================================
+                     STATISTICS
+                ================================================== -->
+
+                <section class="dashboard-stats">
+
+                    <!-- Total Orders -->
+
+                    <div class="dashboard-stat-card">
+
+                        <div class="stat-icon">
+                            📦
+                        </div>
+
+                        <div>
+
+                            <span>
+                                মোট অর্ডার
+                            </span>
+
+                            <strong id="adminTotalOrders">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Pending -->
+
+                    <div class="dashboard-stat-card">
+
+                        <div class="stat-icon pending-icon">
+                            ⏳
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Pending
+                            </span>
+
+                            <strong id="adminPendingOrders">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Processing -->
+
+                    <div class="dashboard-stat-card">
+
+                        <div class="stat-icon processing-icon">
+                            ⚙️
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Processing
+                            </span>
+
+                            <strong id="adminProcessingOrders">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Delivered -->
+
+                    <div class="dashboard-stat-card">
+
+                        <div class="stat-icon delivered-icon">
+                            ✅
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Delivered
+                            </span>
+
+                            <strong id="adminDeliveredOrders">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Total Sales -->
+
+                    <div class="dashboard-stat-card sales-card">
+
+                        <div class="stat-icon sales-icon">
+                            💰
+                        </div>
+
+                        <div>
+
+                            <span>
+                                মোট বিক্রয়
+                            </span>
+
+                            <strong id="adminTotalSales">
+                                ৳0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Today Orders -->
+
+                    <div class="dashboard-stat-card">
+
+                        <div class="stat-icon today-icon">
+                            📅
+                        </div>
+
+                        <div>
+
+                            <span>
+                                আজকের অর্ডার
+                            </span>
+
+                            <strong id="adminTodayOrders">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     ORDER MANAGEMENT
+                ================================================== -->
+
+                <section class="admin-orders-section">
+
+                    <div class="section-heading">
+
+                        <div>
+
+                            <span class="page-label">
+                                ORDER MANAGEMENT
+                            </span>
+
+                            <h2>
+                                সকল অর্ডার
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ================= CONTROLS ================= -->
+
+                    <div class="admin-order-controls">
+
+                        <div class="admin-search-box">
+
+                            <input
+                                type="search"
+                                id="adminOrderSearch"
+                                placeholder="Order ID, নাম বা ফোন দিয়ে খুঁজুন..."
+                            >
+
+                            <span>
+                                🔎
+                            </span>
+
+                        </div>
+
+
+                        <select
+                            id="adminOrderStatusFilter"
+                            class="admin-status-filter"
+                        >
+
+                            <option value="all">
+                                সব স্ট্যাটাস
+                            </option>
+
+                            <option value="Pending">
+                                অপেক্ষমাণ
+                            </option>
+
+                            <option value="Confirmed">
+                                নিশ্চিত
+                            </option>
+
+                            <option value="Processing">
+                                প্রসেসিং
+                            </option>
+
+                            <option value="Shipped">
+                                পাঠানো হয়েছে
+                            </option>
+
+                            <option value="Delivered">
+                                ডেলিভারি সম্পন্ন
+                            </option>
+
+                            <option value="Cancelled">
+                                বাতিল
+                            </option>
+
+                        </select>
+
+
+                        <button
+                            id="adminRefreshOrders"
+                            class="admin-refresh-button"
+                        >
+                            🔄 Refresh
+                        </button>
+
+                    </div>
+
+
+                    <!-- ================= ORDERS ================= -->
+
+                    <div
+                        id="adminOrdersList"
+                        class="admin-orders-list"
+                    >
+
+                        <!-- JavaScript orders এখানে দেখাবে -->
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </main>
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <footer class="admin-footer">
+
+            <div class="admin-container">
+
+                <p>
+                    © 2026
+                    <strong>
+                        ইমরান ইলেকট্রনিক্স অ্যান্ড মোবাইল সার্ভিসিং সেন্টার
+                    </strong>
+                    — Admin Panel
+                </p>
+
+            </div>
+
+        </footer>
+
+    </div>
+
+
+    <!-- =====================================================
+         ORDER DETAILS MODAL
+    ====================================================== -->
+
+    <div
+        id="adminOrderModalOverlay"
+        class="admin-modal-overlay"
+    >
+
+        <div
+            id="adminOrderModal"
+            class="admin-order-modal"
+        >
+
+            <button
+                id="adminOrderModalClose"
+                class="admin-modal-close"
+                type="button"
+            >
+                ✕
+            </button>
+
+
+            <div class="admin-modal-header">
+
+                <span>
+                    ORDER DETAILS
+                </span>
+
+                <h2 id="adminModalOrderId">
+                    --
+                </h2>
+
+                <p id="adminModalOrderDate">
+                    --
+                </p>
+
+            </div>
+
+
+            <!-- Customer -->
+
+            <div class="admin-modal-section">
+
+                <h3>
+                    👤 Customer Information
+                </h3>
+
+                <div class="admin-customer-grid">
+
+                    <div class="admin-info-box">
+
+                        <span>
+                            নাম
+                        </span>
+
+                        <strong id="adminModalCustomerName">
+                            --
+                        </strong>
+
+                    </div>
+
+
+                    <div class="admin-info-box">
+
+                        <span>
+                            ফোন
+                        </span>
+
+                        <strong id="adminModalCustomerPhone">
+                            --
+                        </strong>
+
+                    </div>
+
+
+                    <div class="admin-info-box">
+
+                        <span>
+                            জেলা
+                        </span>
+
+                        <strong id="adminModalCustomerDistrict">
+                            --
+                        </strong>
+
+                    </div>
+
+
+                    <div class="admin-info-box admin-address-box">
+
+                        <span>
+                            ঠিকানা
+                        </span>
+
+                        <strong id="adminModalCustomerAddress">
+                            --
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Products -->
+
+            <div class="admin-modal-section">
+
+                <h3>
+                    🛒 Products
+                </h3>
+
+                <div
+                    id="adminModalItems"
+                    class="admin-modal-items"
+                ></div>
+
+            </div>
+
+
+            <!-- Summary -->
+
+            <div class="admin-modal-summary">
+
+                <div>
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <strong id="adminModalSubtotal">
+                        ৳0
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Delivery
+                    </span>
+
+                    <strong id="adminModalDelivery">
+                        ৳0
+                    </strong>
+
+                </div>
+
+
+                <div class="modal-grand-total">
+
+                    <span>
+                        Grand Total
+                    </span>
+
+                    <strong id="adminModalGrandTotal">
+                        ৳0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- Status -->
+
+            <div class="admin-modal-status">
+
+                <label for="adminModalStatus">
+                    অর্ডার স্ট্যাটাস
+                </label>
+
+                <select id="adminModalStatus">
+
+                    <option value="Pending">
+                        অপেক্ষমাণ
+                    </option>
+
+                    <option value="Confirmed">
+                        নিশ্চিত
+                    </option>
+
+                    <option value="Processing">
+                        প্রসেসিং
+                    </option>
+
+                    <option value="Shipped">
+                        পাঠানো হয়েছে
+                    </option>
+
+                    <option value="Delivered">
+                        ডেলিভারি সম্পন্ন
+                    </option>
+
+                    <option value="Cancelled">
+                        বাতিল
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="admin-modal-actions">
+
+                <button
+                    id="adminSaveStatusButton"
+                    class="admin-save-button"
+                >
+                    💾 Status Save
+                </button>
+
+                <button
+                    id="adminDeleteOrderButton"
+                    class="admin-delete-button"
+                >
+                    🗑️ Order Delete
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="admin.js"></script>
+
+</body>
+
+</html>
