@@ -1,5 +1,6 @@
 /* =====================================================
    IMRAN SHOP - ADMIN PANEL CSS
+   Order Details + Print Invoice
    Stable Version
 ===================================================== */
 
@@ -64,33 +65,30 @@ body {
 }
 
 
+body.modal-open {
+    overflow: hidden;
+}
+
+
 button,
 input,
 select {
-
     font-family: inherit;
-
 }
 
 
 button {
-
     cursor: pointer;
-
 }
 
 
 a {
-
     text-decoration: none;
-
 }
 
 
 .hidden {
-
     display: none !important;
-
 }
 
 
@@ -264,9 +262,7 @@ a {
 
 
 .primary-btn:hover {
-
     background: var(--primary-dark);
-
 }
 
 
@@ -1073,13 +1069,26 @@ a {
 }
 
 
+.order-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    flex-wrap: wrap;
+
+    justify-content: flex-end;
+
+}
+
+
+.details-btn,
+.print-btn,
 .delete-btn {
 
     border: 0;
-
-    background: #fff0f0;
-
-    color: var(--danger);
 
     padding: 8px 11px;
 
@@ -1090,6 +1099,51 @@ a {
     font-weight: 800;
 
     white-space: nowrap;
+
+}
+
+
+.details-btn {
+
+    background: #edf7ef;
+
+    color: var(--primary);
+
+}
+
+
+.details-btn:hover {
+
+    background: var(--primary);
+
+    color: white;
+
+}
+
+
+.print-btn {
+
+    background: #eef4ff;
+
+    color: #1d4ed8;
+
+}
+
+
+.print-btn:hover {
+
+    background: #1d4ed8;
+
+    color: white;
+
+}
+
+
+.delete-btn {
+
+    background: #fff0f0;
+
+    color: var(--danger);
 
 }
 
@@ -1142,6 +1196,387 @@ a {
     color: var(--muted);
 
     font-size: 11px;
+
+}
+
+
+/* =====================================================
+   DETAILS MODAL
+===================================================== */
+
+.details-modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9000;
+
+}
+
+
+.details-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        rgba(10, 20, 14, .62);
+
+    backdrop-filter: blur(3px);
+
+}
+
+
+.details-box {
+
+    position: relative;
+
+    width: min(760px, 94%);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    margin:
+        5vh auto 0;
+
+    background: white;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,.25);
+
+}
+
+
+.details-header {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 2;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 15px;
+
+    padding: 18px 20px;
+
+    background: white;
+
+    border-bottom:
+        1px solid var(--border);
+
+}
+
+
+.details-header h2 {
+
+    font-size: 20px;
+
+    color: var(--primary);
+
+}
+
+
+.close-details-btn {
+
+    width: 34px;
+
+    height: 34px;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: #f1f5f2;
+
+    color: var(--text);
+
+    font-size: 15px;
+
+}
+
+
+.close-details-btn:hover {
+
+    background: var(--danger);
+
+    color: white;
+
+}
+
+
+.details-content {
+
+    padding: 20px;
+
+}
+
+
+.details-order-top {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.details-info-card {
+
+    background: #fafcfb;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 10px;
+
+    padding: 12px;
+
+}
+
+
+.details-info-card span {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+}
+
+
+.details-info-card strong {
+
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 12px;
+
+    overflow-wrap: anywhere;
+
+}
+
+
+.details-section-title {
+
+    font-size: 14px;
+
+    margin:
+        18px 0 8px;
+
+    color: var(--primary);
+
+}
+
+
+.details-product {
+
+    display: grid;
+
+    grid-template-columns:
+        45px 1fr auto;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px 0;
+
+    border-top:
+        1px solid var(--border);
+
+}
+
+
+.details-product-icon {
+
+    width: 45px;
+    height: 45px;
+
+    display: grid;
+
+    place-items: center;
+
+    background: #f1f5f2;
+
+    border-radius: 9px;
+
+    font-size: 21px;
+
+}
+
+
+.details-product-name {
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+}
+
+
+.details-product-meta {
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+}
+
+
+.details-product-price {
+
+    font-weight: 800;
+
+    color: var(--primary);
+
+    font-size: 12px;
+
+}
+
+
+.details-total-box {
+
+    margin-top: 15px;
+
+    padding: 15px;
+
+    background: #f7faf7;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 12px;
+
+}
+
+
+.details-total-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 4px 0;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+}
+
+
+.details-total-row strong {
+
+    color: var(--text);
+
+}
+
+
+.details-total-row.grand {
+
+    border-top:
+        1px solid var(--border);
+
+    margin-top: 7px;
+
+    padding-top: 10px;
+
+    color: var(--text);
+
+    font-size: 14px;
+
+}
+
+
+.details-total-row.grand strong {
+
+    color: var(--primary);
+
+    font-size: 17px;
+
+}
+
+
+.details-actions {
+
+    position: sticky;
+
+    bottom: 0;
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+
+    padding: 13px 20px;
+
+    background: white;
+
+    border-top:
+        1px solid var(--border);
+
+}
+
+
+.print-main-btn,
+.details-close-btn {
+
+    border: 0;
+
+    border-radius: 9px;
+
+    padding: 10px 15px;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+}
+
+
+.print-main-btn {
+
+    background: var(--primary);
+
+    color: white;
+
+}
+
+
+.print-main-btn:hover {
+
+    background: var(--primary-dark);
+
+}
+
+
+.details-close-btn {
+
+    background: #f1f5f2;
+
+    color: var(--text);
 
 }
 
@@ -1369,9 +1804,36 @@ a {
     }
 
 
+    .order-actions {
+
+        justify-content: stretch;
+
+    }
+
+
+    .details-btn,
+    .print-btn,
     .delete-btn {
 
-        width: 100%;
+        flex: 1;
+
+    }
+
+
+    .details-box {
+
+        width: 96%;
+
+        max-height: 94vh;
+
+        margin-top: 3vh;
+
+    }
+
+
+    .details-order-top {
+
+        grid-template-columns: 1fr;
 
     }
 
@@ -1427,6 +1889,52 @@ a {
     .order-item > strong {
 
         grid-column: 2;
+
+    }
+
+
+    .order-actions {
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+    }
+
+
+    .delete-btn {
+
+        grid-column: 1 / -1;
+
+    }
+
+
+    .details-product {
+
+        grid-template-columns:
+            40px 1fr;
+
+    }
+
+
+    .details-product-price {
+
+        grid-column: 2;
+
+    }
+
+
+    .details-actions {
+
+        flex-direction: column;
+
+    }
+
+
+    .print-main-btn,
+    .details-close-btn {
+
+        width: 100%;
 
     }
 
