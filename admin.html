@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="ইমরান ইলেকট্রনিক্স অ্যান্ড মোবাইল সার্ভিসিং সেন্টার - Admin Panel">
+    <meta
+        name="description"
+        content="ইমরান ইলেকট্রনিক্স অ্যান্ড মোবাইল সার্ভিসিং সেন্টার - Admin Panel"
+    >
 
     <title>ইমরান শপ | Admin Panel</title>
 
@@ -12,6 +15,7 @@
 </head>
 
 <body>
+
 
 <!-- =====================================================
      LOGIN SCREEN
@@ -95,7 +99,10 @@
 
 <div id="adminApp" class="admin-app hidden">
 
-    <!-- TOP BAR -->
+
+    <!-- =================================================
+         TOP BAR
+    ================================================== -->
 
     <header class="admin-topbar">
 
@@ -133,11 +140,16 @@
     </header>
 
 
-    <!-- MAIN -->
+    <!-- =================================================
+         MAIN
+    ================================================== -->
 
     <main class="admin-container">
 
-        <!-- WELCOME -->
+
+        <!-- =================================================
+             WELCOME
+        ================================================== -->
 
         <section class="welcome">
 
@@ -293,7 +305,8 @@
                     </h2>
 
                     <p>
-                        Customer order দেখুন, status পরিবর্তন করুন বা মুছে দিন।
+                        Customer order দেখুন, বিস্তারিত দেখুন,
+                        status পরিবর্তন করুন বা মুছে দিন।
                     </p>
 
                 </div>
@@ -365,6 +378,81 @@
         </section>
 
     </main>
+
+</div>
+
+
+<!-- =====================================================
+     ORDER DETAILS MODAL
+===================================================== -->
+
+<div
+    id="orderDetailsModal"
+    class="details-modal hidden"
+>
+
+    <div class="details-overlay"></div>
+
+    <div
+        class="details-box"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="detailsTitle"
+    >
+
+        <div class="details-header">
+
+            <div>
+
+                <span class="small-label">
+                    ORDER DETAILS
+                </span>
+
+                <h2 id="detailsTitle">
+                    অর্ডার বিস্তারিত
+                </h2>
+
+            </div>
+
+            <button
+                id="closeDetailsButton"
+                type="button"
+                class="close-details-btn"
+                aria-label="Close"
+            >
+                ✕
+            </button>
+
+        </div>
+
+
+        <div
+            id="detailsContent"
+            class="details-content"
+        ></div>
+
+
+        <div class="details-actions">
+
+            <button
+                id="detailsPrintButton"
+                type="button"
+                class="print-main-btn"
+            >
+                🖨️ Invoice Print
+            </button>
+
+            <button
+                id="detailsCloseButton"
+                type="button"
+                class="details-close-btn"
+            >
+                বন্ধ করুন
+            </button>
+
+        </div>
+
+    </div>
 
 </div>
 
